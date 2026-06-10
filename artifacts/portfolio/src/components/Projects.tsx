@@ -16,6 +16,7 @@ interface Project {
   github?: string;
   demo?: string;
   gradient: string;
+  image: string;
   featured?: boolean;
 }
 
@@ -38,6 +39,7 @@ const projects: Project[] = [
       "Fast synchronization using WebSockets",
     ],
     gradient: "from-violet-500/30 to-indigo-900/20",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2070&auto=format&fit=crop",
     featured: true,
   },
   {
@@ -58,6 +60,7 @@ const projects: Project[] = [
       "Administrative review and resolution portal",
     ],
     gradient: "from-blue-500/25 to-cyan-900/20",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 3,
@@ -77,6 +80,7 @@ const projects: Project[] = [
       "Operational analytics and reporting",
     ],
     gradient: "from-emerald-500/25 to-green-900/20",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 4,
@@ -96,6 +100,7 @@ const projects: Project[] = [
       "Smart context-aware automation workflows",
     ],
     gradient: "from-purple-500/25 to-violet-900/20",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1974&auto=format&fit=crop",
   },
   {
     id: 5,
@@ -115,6 +120,7 @@ const projects: Project[] = [
       "AI-powered context-aware question answering",
     ],
     gradient: "from-pink-500/20 to-rose-900/20",
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1974&auto=format&fit=crop",
   },
 ];
 
@@ -195,14 +201,19 @@ export default function Projects() {
               data-testid={`card-project-${project.id}`}
             >
               <div className={`h-48 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
                 {project.featured && (
-                  <div className="absolute top-3 left-3 flex items-center gap-1 px-3 py-1.5 bg-background/70 backdrop-blur rounded-full border border-amber-400/30">
+                  <div className="absolute top-3 left-3 flex items-center gap-1 px-3 py-1.5 bg-background/70 backdrop-blur rounded-full border border-amber-400/30 z-10">
                     <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
                     <span className="text-xs font-medium text-amber-400">Featured</span>
                   </div>
                 )}
-                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.08),transparent)]" />
-                <div className="absolute bottom-3 right-3 flex gap-1.5" onClick={e => e.stopPropagation()}>
+                <div className="absolute bottom-3 right-3 flex gap-1.5 z-10" onClick={e => e.stopPropagation()}>
                   <a href={project.github || "#"} className="p-2 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
                     <Github className="w-4.5 h-4.5" />
                   </a>
@@ -262,9 +273,14 @@ export default function Projects() {
                 <X className="w-6 h-6 text-white" />
               </button>
 
-              <div className={`h-56 w-full bg-gradient-to-br ${selectedProject.gradient} relative`}>
-                <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                <div className="absolute bottom-5 left-7">
+              <div className={`h-56 w-full bg-gradient-to-br ${selectedProject.gradient} relative overflow-hidden`}>
+                <img 
+                  src={selectedProject.image} 
+                  alt={selectedProject.title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
+                <div className="absolute bottom-5 left-7 z-10">
                   <span className={`text-sm font-medium px-4 py-1.5 rounded-full border ${selectedProject.tagColor}`}>
                     {selectedProject.tag}
                   </span>

@@ -79,7 +79,7 @@ export default function Hero() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                data-testid={`link-${label.toLowerCase()}`}
+                data-testid={`link-${(label as string).toLowerCase()}`}
                 className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 transition-all duration-200"
               >
                 <Icon className="w-5 h-5" />
