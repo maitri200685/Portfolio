@@ -1,0 +1,186 @@
+Create a premium, modern, minimal, and professional IT Engineer Portfolio Website.
+
+IMPORTANT DESIGN DIRECTION:
+Do NOT make it look like a typical AI-themed portfolio full of glowing effects and futuristic elements. The design should feel elegant, clean, modern, and industry-level professional. Use AI and neural network visuals only as subtle background elements.
+
+COLOR PALETTE:
+
+* Primary Background: Deep Matte Black (#080808)
+* Secondary Background: Dark Charcoal (#121212)
+* Accent Colors:
+
+  * Soft Purple (#B48EFF)
+  * Soft Pink (#FFB6E6)
+  * White (#FFFFFF)
+  * Light Lavender (#E6D9FF)
+* Use gradients carefully and minimally.
+* Avoid neon cyberpunk colors.
+
+TYPOGRAPHY:
+
+* Use modern premium fonts.
+* Headings: Space Grotesk / Satoshi / Clash Display
+* Body: Inter / Manrope
+* Smooth font rendering.
+* Professional spacing and hierarchy.
+
+GLOBAL BACKGROUND:
+Across the entire portfolio, add a very subtle 3D neural network structure floating in the background.
+Requirements:
+
+* Low opacity (5-10%)
+* Slight movement
+* Soft blur effect
+* Connected nodes and lines
+* Looks premium and scientific
+* Should not distract from content
+* Present across all sections
+
+LANDING PAGE (HERO SECTION):
+Create a stunning first impression.
+
+Left Side:
+
+* Name
+* Professional title
+* Short introduction
+* Resume button
+* Contact button
+
+Right Side:
+Create a large interactive 3D scene containing:
+
+* Floating neural network
+* AI brain inspired structure
+* Data flow particles
+* Code fragments
+* Abstract IT engineering elements
+* Glassmorphism effects
+* Soft pink-purple-white lighting
+
+The 3D scene should rotate slowly and respond slightly to mouse movement.
+
+SCROLL EXPERIENCE:
+Scrolling should feel like modern premium websites and Instagram reel transitions.
+
+Requirements:
+
+* Smooth scrolling
+* Scroll-triggered animations
+* Sections reveal gradually
+* Elements fade and slide elegantly
+* Content appears one by one
+* Slight parallax effect
+* Premium motion design
+* No excessive animation
+
+SECTIONS:
+
+1. HERO SECTION
+2. ABOUT ME
+3. EDUCATION
+4. TECHNICAL SKILLS
+5. PROJECTS
+6. EXPERIENCE
+7. CERTIFICATIONS
+8. ACHIEVEMENTS
+9. CONTACT
+
+PROJECT SECTION:
+Create beautiful project cards.
+
+When clicking a project card:
+
+* Open project details in a fullscreen modal
+* Background becomes blurred
+* Smooth transition animation
+* Show:
+
+  * Project Overview
+  * Technologies Used
+  * Features
+  * Screenshots
+  * GitHub Link
+  * Live Demo Link
+  * Challenges Solved
+
+Modal should close smoothly.
+
+SKILLS SECTION:
+Display skills using:
+
+* 3D floating cards
+* Glass effect
+* Hover animations
+* Categorized sections:
+
+  * Programming Languages
+  * Web Development
+  * AI & Machine Learning
+  * Tools
+  * Databases
+
+CURSOR EFFECT:
+Create a custom cursor.
+
+Requirements:
+
+* Small elegant circle
+* Secondary small circle following cursor
+* Soft sparkles emitted on movement
+* Pink-purple glow
+* Smooth motion
+* Professional appearance
+* Not distracting
+
+ANIMATIONS:
+
+* Framer Motion style animations
+* Smooth easing
+* Premium transitions
+* Hover effects
+* Magnetic buttons
+* Subtle depth effects
+* Modern micro-interactions
+
+CONTACT SECTION:
+Create a premium contact form with:
+
+* Glassmorphism card
+* Smooth input animations
+* Social media icons
+* LinkedIn
+* GitHub
+* Email
+* Portfolio links
+
+PERFORMANCE:
+
+* Fast loading
+* Responsive
+* Mobile optimized
+* Smooth 60fps animations
+* Optimized Three.js scenes
+
+FINAL LOOK:
+The website should feel like:
+
+* Apple-level minimalism
+* Modern startup design
+* Premium IT engineer portfolio
+* Slight AI inspiration
+* Elegant and professional
+* Clean and uncluttered
+* 3D but not overly futuristic
+* Suitable for recruiters, companies, and clients
+
+The overall feeling should be:
+"Professional IT Engineer + Modern Technology + Subtle AI + Premium 3D Experience"
+
+Avoid:
+
+* Excessive glowing effects
+* Overly futuristic cyberpunk visuals
+* Too many animations
+* Bright neon colors
+* Cluttered layouts
