@@ -255,21 +255,34 @@ export default function Hero() {
           </div>
         </motion.div>
 
+        {/* Desktop photo — floating cutout */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="h-[460px] w-full relative hidden md:flex items-center justify-center"
+          transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden md:flex items-end justify-center relative"
+          style={{ zIndex: 10 }}
         >
-          <div className="absolute inset-0">
-            <ITScene />
-          </div>
+          <motion.img
+            src="/maitri-cutout.png"
+            alt="Maitri Prajapati"
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              width: "420px",
+              height: "auto",
+              objectFit: "contain",
+              display: "block",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}
+          />
 
           {/* Floating glass cards */}
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-8 right-2 glass-card px-4 py-3 rounded-xl z-10"
+            className="absolute top-12 right-0 glass-card px-4 py-3 rounded-xl z-10"
           >
             <p className="text-[10px] font-mono text-primary/70 mb-0.5">Status</p>
             <p className="text-sm font-semibold text-white">Open to Work</p>
@@ -278,7 +291,7 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, 7, 0] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-14 left-2 glass-card px-4 py-3 rounded-xl z-10"
+            className="absolute bottom-8 left-0 glass-card px-4 py-3 rounded-xl z-10"
           >
             <p className="text-[10px] font-mono text-secondary/70 mb-0.5">Hackathon</p>
             <p className="text-sm font-semibold text-white">Top 8 National</p>
@@ -287,10 +300,26 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-1/2 -translate-y-1/2 left-0 glass-card px-3 py-2 rounded-lg z-10"
+            className="absolute top-1/3 -left-4 glass-card px-3 py-2 rounded-lg z-10"
           >
             <p className="text-xs font-mono text-primary/80">10+ Projects</p>
           </motion.div>
+        </motion.div>
+
+        {/* Mobile photo — below text, centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="flex md:hidden justify-center mt-4"
+        >
+          <motion.img
+            src="/maitri-cutout.png"
+            alt="Maitri Prajapati"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            style={{ width: "220px", height: "auto", objectFit: "contain", display: "block" }}
+          />
         </motion.div>
 
       </div>

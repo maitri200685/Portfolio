@@ -26,14 +26,33 @@ export default function Contact() {
     defaultValues: { name: "", email: "", phone: "", subject: "", message: "" },
   });
 
-  async function onSubmit(_values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setState("sending");
-    await new Promise(r => setTimeout(r, 1400));
-    setState("success");
-    setTimeout(() => {
-      setState("idle");
-      form.reset();
-    }, 3500);
+    try {
+      const body = [
+        `Name: ${values.name}`,
+        `Email: ${values.email}`,
+        values.phone ? `Phone: ${values.phone}` : null,
+        ``,
+        values.message,
+      ].filter(Boolean).join("\n");
+
+      const mailto =
+        `mailto:maitri2k6@gmail.com` +
+        `?subject=${encodeURIComponent(values.subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+      window.open(mailto, "_blank");
+      await new Promise(r => setTimeout(r, 600));
+      setState("success");
+      setTimeout(() => {
+        setState("idle");
+        form.reset();
+      }, 3500);
+    } catch {
+      setState("error");
+      setTimeout(() => setState("idle"), 3000);
+    }
   }
 
   const info = [
