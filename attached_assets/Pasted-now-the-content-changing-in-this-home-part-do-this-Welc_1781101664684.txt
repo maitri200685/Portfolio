@@ -1,0 +1,260 @@
+now the content changing in this home part do this Welcome to my portfolio. I'm Maitri Prajapati, and I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation." in about me section want this content  I'm Maitri Prajapati, an Information Technology Engineering student passionate about building innovative digital solutions that combine creativity, technology, and real-world impact.
+
+My interests span across Web Development, Artificial Intelligence, Machine Learning, Data Science, and UI/UX Design. I enjoy transforming ideas into interactive applications while continuously exploring emerging technologies and improving my problem-solving skills.
+
+Beyond academics, I actively work on personal projects, participate in hackathons, and learn modern development tools to strengthen my technical foundation. I believe technology is most powerful when it solves meaningful problems and creates better experiences for people.
+
+Currently, I am focused on expanding my expertise in Full-Stack Development, AI-powered applications, and software engineering while building projects that reflect innovation, functionality, and thoughtful design.
+in skills part thios one Programming Languages
+Python
+Java
+JavaScript
+HTML5
+CSS3
+AI & Machine Learning
+Machine Learning
+Data Science
+Data Analysis
+NumPy
+Pandas
+Scikit-Learn
+Google Gemini API
+AI Automation
+Tools & Platforms
+Git & GitHub
+VS Code
+Canva
+Figma
+Arduino IDE
+Unity
+Google Colab
+Jupyter Notebook
+Database Technologies
+MySQL
+postrqual sql 
+Currently Learning
+
+This section looks very professional for students:
+
+Deep Learning
+Advanced React
+Unity Game Development
+Cloud Computing
+AI Model Deployment
+Digital Marketing in project part this detiels 🚀 Collab Code – Real-Time Collaborative Coding Platform
+
+Highlight Tag: Featured Project
+
+Short Tagline:
+Real-time collaborative coding environment for developers and students.
+
+Description:
+Built a browser-based collaborative code editor that allows multiple users to write, edit, and execute code together in real time. The platform supports live synchronization, terminal interaction, and collaborative problem-solving, making it ideal for coding interviews, learning, and team development.
+
+Technologies:
+Python, JavaScript, Node.js, WebSocket, HTML, CSS
+
+Key Features:
+
+Real-time code collaboration
+Multi-user editing
+Live code execution
+Integrated terminal support
+Fast synchronization using WebSockets
+🏆 CivicTrack – Smart Civic Issue Reporting System
+
+Highlight Tag: SIH Hackathon Project
+
+Short Tagline:
+Connecting citizens and local authorities through technology.
+
+Description:
+CivicTrack is a web-based platform that enables citizens to report civic issues such as potholes, garbage accumulation, water leakage, and damaged infrastructure. The system helps authorities monitor, prioritize, and resolve issues efficiently while keeping citizens updated on complaint status.
+
+Technologies:
+Python, Flask, HTML, CSS, JavaScript, Database Systems
+
+Key Features:
+
+Issue reporting with images
+Real-time complaint tracking
+Status updates and notifications
+Location-based issue management
+Administrative dashboard
+🌐 FleetFlow – Smart Logistics & Fleet Management Platform
+
+Highlight Tag: Odoo Hackathon Project
+
+Short Tagline:
+Optimizing fleet operations through intelligent management.
+
+Description:
+FleetFlow is a logistics and fleet management solution designed to streamline vehicle operations, route planning, and resource utilization. The platform improves operational efficiency while providing better tracking and management of transportation resources.
+
+Technologies:
+Odoo, Python, Database Management
+
+Key Features:
+
+Fleet monitoring
+Route optimization
+Vehicle management
+Resource allocation
+Operational analytics
+🤖 JARVIS AI Assistant
+
+Highlight Tag: Personal Flagship Project
+
+Short Tagline:
+An intelligent AI assistant for automation and productivity.
+
+Description:
+JARVIS is an AI-powered virtual assistant designed to automate tasks, create projects, execute commands, and provide intelligent support. The system integrates voice commands, automation workflows, and AI-powered error handling to improve productivity and user experience.
+
+Technologies:
+Python, Gemini API, Automation Tools, AI Models
+
+Key Features:
+
+Voice-controlled assistant
+Automated project creation
+AI-powered code correction
+Task scheduling
+Smart automation workflows
+🧠 RAG-Based AI Teaching Assistant
+
+Highlight Tag: AI / Machine Learning Project
+
+Short Tagline:
+Transforming educational content into an intelligent learning assistant.
+
+Description:
+Developed a Retrieval-Augmented Generation (RAG) based AI assistant capable of processing educational video content, generating embeddings, retrieving relevant knowledge, and providing context-aware responses. The system converts lectures into searchable knowledge and improves learning accessibility.
+
+Technologies:
+Python, Whisper, OpenAI/Gemini APIs, Embeddings, Vector Search
+
+Key Features:
+
+Video-to-text transcription
+Timestamp extraction
+Embedding generation
+Semantic search
+AI-powered question answering
+Knowledge retrieval systemCONTACT SECTION FIXES
+
+Remove:
+
+* Phone Number field
+* Subject field
+
+Keep only:
+
+1. Full Name
+2. Email Address
+3. Message
+
+Layout:
+
+* Modern glassmorphism card
+* Minimal premium design
+* Dark matte black background
+* Soft purple and pink accents
+
+SOCIAL LINKS
+
+LinkedIn Button:
+https://www.linkedin.com/in/maitri-prajapati-140b74317
+
+GitHub Button:
+https://github.com/maitri200685
+
+Requirements:
+
+* Clicking LinkedIn opens my LinkedIn profile in a new tab.
+* Clicking GitHub opens my GitHub profile in a new tab.
+* Add smooth hover animations.
+* Add official LinkedIn and GitHub icons.
+
+EMAIL DISPLAY
+
+Display:
+[maitri2k6@gmail.com](mailto:maitri2k6@gmail.com)
+
+Make the email clickable.
+
+When clicked:
+Open the user's default email application.
+
+Use:
+mailto:maitri2k6@gmail.com
+
+CONTACT FORM FUNCTIONALITY
+
+When a visitor fills:
+
+* Name
+* Email
+* Message
+
+and clicks "Send Message",
+
+the message should be delivered directly to:
+
+[maitri2k6@gmail.com](mailto:maitri2k6@gmail.com)
+
+IMPLEMENTATION REQUIREMENTS
+
+Use EmailJS, FormSubmit, Resend, or a backend API.
+
+Required email content:
+
+Subject:
+New Portfolio Contact Form Submission
+
+Body:
+
+Name: [User Name]
+
+Email: [User Email]
+
+Message:
+[User Message]
+
+SUCCESS MESSAGE
+
+After sending:
+
+Show:
+"Thank you for reaching out. Your message has been sent successfully."
+
+ERROR MESSAGE
+
+If sending fails:
+
+Show:
+"Unable to send message. Please try again later."
+
+BUTTON DESIGN
+
+Send Message Button:
+
+* Soft Purple to Soft Pink Gradient
+* Smooth hover effect
+* Loading animation while sending
+* Premium glass effect
+
+FINAL GOAL
+
+The contact form must send real emails directly to:
+[maitri2k6@gmail.com](mailto:maitri2k6@gmail.com)
+
+and LinkedIn/GitHub buttons must open the correct profiles in a new browser tab.
+Connect the contact form to EmailJS.
+
+Use EmailJS for email delivery.
+
+When a visitor submits the form, send the message to:
+maitri2k6@gmail.com
+
+Create all required frontend integration code and environment variables.

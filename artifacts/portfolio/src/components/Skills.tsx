@@ -1,89 +1,62 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, Layout, Brain, Wrench } from "lucide-react";
+import { Code2, Brain, Wrench, Database, Sparkles } from "lucide-react";
 
 const categories = [
   {
-    title: "Programming",
+    id: "programming",
+    title: "Programming Languages",
     icon: Code2,
-    skills: [
-      { name: "Python",     pct: 90 },
-      { name: "Java",       pct: 78 },
-      { name: "JavaScript", pct: 88 },
-      { name: "C",          pct: 70 },
-    ],
+    skills: ["Python", "Java", "JavaScript", "HTML5", "CSS3"],
   },
   {
-    title: "Web",
-    icon: Layout,
-    skills: [
-      { name: "HTML / CSS", pct: 95 },
-      { name: "React",      pct: 88 },
-      { name: "Next.js",    pct: 82 },
-      { name: "Node.js",    pct: 75 },
-    ],
-  },
-  {
-    title: "AI & Data",
+    id: "ai",
+    title: "AI & Machine Learning",
     icon: Brain,
-    skills: [
-      { name: "Machine Learning", pct: 80 },
-      { name: "Data Science",     pct: 75 },
-      { name: "TensorFlow",       pct: 72 },
-      { name: "FastAPI",          pct: 78 },
-    ],
+    skills: ["Machine Learning", "Data Science", "Data Analysis", "NumPy", "Pandas", "Scikit-Learn", "Google Gemini API", "AI Automation"],
   },
   {
-    title: "Tools",
+    id: "tools",
+    title: "Tools & Platforms",
     icon: Wrench,
-    skills: [
-      { name: "GitHub",  pct: 92 },
-      { name: "VS Code", pct: 95 },
-      { name: "Figma",   pct: 80 },
-      { name: "Canva",   pct: 85 },
-    ],
+    skills: ["Git & GitHub", "VS Code", "Canva", "Figma", "Arduino IDE", "Unity", "Google Colab", "Jupyter Notebook"],
+  },
+  {
+    id: "databases",
+    title: "Database Technologies",
+    icon: Database,
+    skills: ["MySQL", "PostgreSQL"],
+  },
+  {
+    id: "learning",
+    title: "Currently Learning",
+    icon: Sparkles,
+    skills: ["Deep Learning", "Advanced React", "Unity Game Development", "Cloud Computing", "AI Model Deployment", "Digital Marketing"],
+    isLearning: true,
   },
 ];
 
-const FILTERS = ["All", "Programming", "Web", "AI & Data", "Tools"];
+const FILTERS = [
+  { label: "All",           id: "all" },
+  { label: "Programming",   id: "programming" },
+  { label: "AI & ML",       id: "ai" },
+  { label: "Tools",         id: "tools" },
+  { label: "Databases",     id: "databases" },
+  { label: "Learning",      id: "learning" },
+];
 
-function SkillBar({ name, pct, delay }: { name: string; pct: number; delay: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay }}
-    >
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="text-sm text-white/80 font-medium">{name}</span>
-        <span className="text-xs font-mono text-primary/70">{pct}%</span>
-      </div>
-      <div className="h-1 rounded-full bg-white/5 overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${pct}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: delay + 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
-        />
-      </div>
-    </motion.div>
-  );
-}
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.09 } },
+};
+const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
 export default function Skills() {
-  const [active, setActive] = useState("All");
+  const [active, setActive] = useState("all");
 
-  const visible = active === "All"
+  const visible = active === "all"
     ? categories
-    : categories.filter(c => c.title === active);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-  };
-  const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
+    : categories.filter(c => c.id === active);
 
   return (
     <section id="skills" className="py-24 relative z-10">
@@ -105,16 +78,16 @@ export default function Skills() {
         <div className="flex flex-wrap gap-2 mb-10">
           {FILTERS.map(f => (
             <button
-              key={f}
-              onClick={() => setActive(f)}
-              data-testid={`filter-${f.toLowerCase().replace(/[\s&]+/g, "_")}`}
+              key={f.id}
+              onClick={() => setActive(f.id)}
+              data-testid={`filter-${f.id}`}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
-                active === f
+                active === f.id
                   ? "bg-primary text-background border-primary"
                   : "border-white/10 text-muted-foreground hover:border-primary/40 hover:text-white bg-transparent"
               }`}
             >
-              {f}
+              {f.label}
             </button>
           ))}
         </div>
@@ -124,30 +97,41 @@ export default function Skills() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 xl:grid-cols-4 gap-6"
+          className="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
         >
-          {visible.map((cat, idx) => (
+          {visible.map((cat) => (
             <motion.div
-              key={cat.title}
+              key={cat.id}
               variants={item}
-              whileHover={{ scale: 1.02, rotateY: 4, rotateX: -3 }}
-              className="glass-card p-6 rounded-2xl group hover:border-primary/40 transition-all duration-300"
+              whileHover={{ scale: 1.02, rotateY: 3, rotateX: -2 }}
+              className={`glass-card p-6 rounded-2xl group hover:border-primary/40 transition-all duration-300 ${
+                cat.isLearning ? "border-secondary/20 md:col-span-2 xl:col-span-1" : ""
+              }`}
               style={{ transformStyle: "preserve-3d", perspective: "800px" }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors">
-                  <cat.icon className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 mb-5">
+                <div className={`p-2.5 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors ${cat.isLearning ? "text-secondary" : "text-primary"}`}>
+                  <cat.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-base font-bold text-white">{cat.title}</h3>
+                <div>
+                  <h3 className="text-sm font-bold text-white">{cat.title}</h3>
+                  {cat.isLearning && (
+                    <span className="text-[10px] font-mono text-secondary/70">In progress</span>
+                  )}
+                </div>
               </div>
-              <div className="space-y-4">
-                {cat.skills.map((skill, sIdx) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    pct={skill.pct}
-                    delay={idx * 0.05 + sIdx * 0.04}
-                  />
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className={`text-xs px-3 py-1.5 rounded-full border transition-colors duration-200 group-hover:border-primary/30 ${
+                      cat.isLearning
+                        ? "bg-secondary/5 border-secondary/15 text-secondary/80"
+                        : "bg-white/4 border-white/10 text-muted-foreground"
+                    }`}
+                  >
+                    {skill}
+                  </span>
                 ))}
               </div>
             </motion.div>

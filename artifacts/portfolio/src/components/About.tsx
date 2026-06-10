@@ -65,7 +65,6 @@ export default function About() {
           >
             {/* Avatar card */}
             <div className="glass-card rounded-3xl p-8 relative overflow-hidden group max-w-sm">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
               <div className="aspect-square rounded-2xl bg-background border border-white/5 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute w-[200%] h-[200%] bg-gradient-conic from-primary via-background to-secondary opacity-20 blur-3xl animate-spin" style={{ animationDuration: "12s" }} />
                 <span className="text-7xl font-display font-bold text-white relative z-10 drop-shadow-[0_0_20px_rgba(180,142,255,0.6)]">
@@ -81,15 +80,22 @@ export default function About() {
               </div>
             </div>
 
+            <p className="text-muted-foreground text-sm leading-relaxed mb-2 font-light italic">
+              Welcome to my portfolio. I'm Maitri Prajapati, and I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
+            </p>
+
             <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
               <p>
-                I'm Maitri Prajapati — an IT Engineering student driven by engineering curiosity and the "why" behind every line of code.
+                I'm an Information Technology Engineering student passionate about building innovative digital solutions that combine creativity, technology, and real-world impact.
               </p>
               <p>
-                I build intelligent systems at the intersection of full-stack development and AI. My work spans sleek UI design, robust backend services, and ML-powered features that create real-world impact.
+                My interests span across Web Development, Artificial Intelligence, Machine Learning, Data Science, and UI/UX Design. I enjoy transforming ideas into interactive applications while continuously exploring emerging technologies and improving my problem-solving skills.
               </p>
               <p>
-                From national hackathons to deployed products, I turn complex problems into clean, elegant software.
+                Beyond academics, I actively work on personal projects, participate in hackathons, and learn modern development tools to strengthen my technical foundation. I believe technology is most powerful when it solves meaningful problems and creates better experiences for people.
+              </p>
+              <p>
+                Currently focused on expanding my expertise in Full-Stack Development, AI-powered applications, and software engineering — building projects that reflect innovation, functionality, and thoughtful design.
               </p>
             </div>
 

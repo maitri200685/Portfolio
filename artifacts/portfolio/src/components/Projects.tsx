@@ -1,95 +1,120 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, X, Search } from "lucide-react";
+import { Github, ExternalLink, X, Search, Star } from "lucide-react";
 
 interface Project {
   id: number;
   title: string;
   subtitle: string;
+  tag: string;
+  tagColor: string;
   descShort: string;
   descLong: string;
   category: string;
   stack: string[];
-  problem: string;
-  solution: string;
   features: string[];
   github?: string;
   demo?: string;
   gradient: string;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "JARVIS AI Assistant",
-    subtitle: "Personal brain ecosystem",
-    descShort: "A personal AI assistant ecosystem with voice interaction, task management, and LLM-powered reasoning.",
-    descLong: "JARVIS is a full-featured personal AI assistant inspired by the concept of a second brain. It combines a FastAPI backend, a React frontend, and an LLM reasoning layer to handle voice queries, task automation, and knowledge retrieval.",
-    category: "AI",
-    stack: ["Python", "FastAPI", "React", "LangChain", "OpenAI API"],
-    problem: "Managing scattered notes, reminders, and research across tools with no unified intelligent interface.",
-    solution: "Built a centralized AI assistant that ingests personal data, answers questions with context, and automates workflows via natural language commands.",
+    title: "Collab Code",
+    subtitle: "Real-Time Collaborative Coding Platform",
+    tag: "Featured Project",
+    tagColor: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+    descShort: "Real-time collaborative coding environment for developers and students.",
+    descLong: "Built a browser-based collaborative code editor that allows multiple users to write, edit, and execute code together in real time. The platform supports live synchronization, terminal interaction, and collaborative problem-solving — ideal for coding interviews, learning, and team development.",
+    category: "Web",
+    stack: ["Python", "JavaScript", "Node.js", "WebSocket", "HTML", "CSS"],
     features: [
-      "Voice-activated query interface",
-      "RAG-based knowledge retrieval from personal notes",
-      "Task scheduling and calendar integration",
-      "Conversation history with semantic search",
+      "Real-time code collaboration with live cursor sync",
+      "Multi-user editing with conflict resolution",
+      "Live code execution in sandboxed environment",
+      "Integrated terminal support",
+      "Fast synchronization using WebSockets",
     ],
-    gradient: "from-violet-500/30 to-purple-900/20",
+    gradient: "from-violet-500/30 to-indigo-900/20",
+    featured: true,
   },
   {
     id: 2,
     title: "CivicTrack",
-    subtitle: "Public works tracking platform",
-    descShort: "A civic platform that lets citizens report, track, and follow up on local public works issues.",
-    descLong: "CivicTrack bridges the gap between citizens and local government bodies. Built with Next.js and Firebase, it allows users to submit infrastructure complaints, track resolution status, and vote on community priorities in real time.",
+    subtitle: "Smart Civic Issue Reporting System",
+    tag: "SIH Hackathon Project",
+    tagColor: "text-blue-400 bg-blue-400/10 border-blue-400/20",
+    descShort: "Connecting citizens and local authorities through technology.",
+    descLong: "CivicTrack is a web-based platform that enables citizens to report civic issues such as potholes, garbage accumulation, water leakage, and damaged infrastructure. The system helps authorities monitor, prioritize, and resolve issues efficiently while keeping citizens updated on complaint status.",
     category: "Web",
-    stack: ["Next.js", "Firebase", "TypeScript", "Tailwind CSS", "Google Maps API"],
-    problem: "Citizens lack visibility into the status of reported civic issues — reports go into a black box and are never followed up.",
-    solution: "Created a transparent reporting and tracking portal where submissions are geotagged, categorized, and publicly visible with real-time status updates.",
+    stack: ["Python", "Flask", "HTML", "CSS", "JavaScript", "Database Systems"],
     features: [
-      "Geotagged issue submissions with photo upload",
-      "Real-time status tracking (Open → In Progress → Resolved)",
-      "Community upvoting and priority scoring",
-      "Admin dashboard for municipal responders",
+      "Issue reporting with photo attachments",
+      "Real-time complaint tracking dashboard",
+      "Status updates and citizen notifications",
+      "Location-based issue management",
+      "Administrative review and resolution portal",
     ],
     gradient: "from-blue-500/25 to-cyan-900/20",
   },
   {
     id: 3,
-    title: "Skill Swap",
-    subtitle: "Peer-to-peer knowledge exchange",
-    descShort: "A marketplace where users trade skills — teach what you know, learn what you don't.",
-    descLong: "Skill Swap is a social learning exchange platform built on React, Express, and MongoDB. Users create profiles listing skills they can teach and skills they want to learn, then get matched with compatible peers for live sessions.",
+    title: "FleetFlow",
+    subtitle: "Smart Logistics & Fleet Management Platform",
+    tag: "Odoo Hackathon Project",
+    tagColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+    descShort: "Optimizing fleet operations through intelligent management.",
+    descLong: "FleetFlow is a logistics and fleet management solution designed to streamline vehicle operations, route planning, and resource utilization. The platform improves operational efficiency while providing better tracking and management of transportation resources.",
     category: "Web",
-    stack: ["React", "Express", "MongoDB", "Socket.io", "Node.js"],
-    problem: "Online learning is passive and expensive; most people already have valuable skills to offer but no platform to exchange them.",
-    solution: "Built a matchmaking and scheduling system where skills are the currency — enabling zero-cost peer learning through barter.",
+    stack: ["Odoo", "Python", "Database Management"],
     features: [
-      "Skill-based matching algorithm",
-      "Real-time chat and session scheduling",
-      "Rating and review system",
-      "Session recording (with consent) for async review",
+      "Real-time fleet monitoring and tracking",
+      "Intelligent route optimization",
+      "Vehicle lifecycle management",
+      "Resource allocation and scheduling",
+      "Operational analytics and reporting",
     ],
     gradient: "from-emerald-500/25 to-green-900/20",
   },
   {
     id: 4,
-    title: "Soil Moisture Analysis",
-    subtitle: "IoT & ML irrigation optimizer",
-    descShort: "An IoT-driven system that uses ML to predict optimal irrigation schedules from soil sensor data.",
-    descLong: "This project combines ESP32-based IoT sensors deployed in agricultural fields with a TensorFlow model that predicts soil moisture levels and recommends irrigation timing. Data is visualized on a React dashboard with real-time alerts.",
+    title: "JARVIS AI Assistant",
+    subtitle: "Intelligent AI Assistant for Automation",
+    tag: "Personal Flagship Project",
+    tagColor: "text-purple-400 bg-purple-400/10 border-purple-400/20",
+    descShort: "An intelligent AI assistant for automation and productivity.",
+    descLong: "JARVIS is an AI-powered virtual assistant designed to automate tasks, create projects, execute commands, and provide intelligent support. The system integrates voice commands, automation workflows, and AI-powered error handling to improve productivity and user experience.",
     category: "AI",
-    stack: ["Python", "TensorFlow", "React", "MQTT", "Raspberry Pi"],
-    problem: "Over-irrigation wastes water and damages crops; farmers lack real-time, data-driven irrigation guidance.",
-    solution: "Deployed low-cost soil sensors that stream data to a cloud pipeline; trained an LSTM model to predict moisture dips and trigger alerts before crops are affected.",
+    stack: ["Python", "Gemini API", "Automation Tools", "AI Models"],
     features: [
-      "Real-time soil moisture telemetry dashboard",
-      "LSTM-based predictive moisture forecasting",
-      "Automated irrigation trigger thresholds",
-      "Historical analytics with weather correlation",
+      "Voice-controlled command interface",
+      "Automated project creation and scaffolding",
+      "AI-powered code correction and suggestions",
+      "Task scheduling and workflow automation",
+      "Smart context-aware automation workflows",
     ],
-    gradient: "from-amber-500/20 to-orange-900/20",
+    gradient: "from-purple-500/25 to-violet-900/20",
+  },
+  {
+    id: 5,
+    title: "RAG Teaching Assistant",
+    subtitle: "AI-Powered Educational Knowledge System",
+    tag: "AI / Machine Learning Project",
+    tagColor: "text-pink-400 bg-pink-400/10 border-pink-400/20",
+    descShort: "Transforming educational content into an intelligent learning assistant.",
+    descLong: "Developed a Retrieval-Augmented Generation (RAG) based AI assistant capable of processing educational video content, generating embeddings, retrieving relevant knowledge, and providing context-aware responses. The system converts lectures into searchable knowledge and improves learning accessibility.",
+    category: "AI",
+    stack: ["Python", "Whisper", "OpenAI/Gemini APIs", "Embeddings", "Vector Search"],
+    features: [
+      "Video-to-text transcription with Whisper",
+      "Automatic timestamp extraction",
+      "Semantic embedding generation",
+      "Vector-based semantic search",
+      "AI-powered context-aware question answering",
+    ],
+    gradient: "from-pink-500/20 to-rose-900/20",
   },
 ];
 
@@ -123,7 +148,7 @@ export default function Projects() {
           <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
 
-        {/* Filter + Search row */}
+        {/* Filter + Search */}
         <div className="flex flex-col sm:flex-row gap-4 mb-10 items-start sm:items-center">
           <div className="flex gap-2">
             {CATEGORIES.map(c => (
@@ -154,39 +179,47 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {visible.map((project, idx) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
+              transition={{ delay: idx * 0.07 }}
               whileHover={{ y: -8 }}
               onClick={() => setSelectedProject(project)}
-              className="glass-card rounded-2xl overflow-hidden cursor-pointer group"
+              className={`glass-card rounded-2xl overflow-hidden cursor-pointer group ${
+                project.featured ? "ring-1 ring-primary/20" : ""
+              }`}
               data-testid={`card-project-${project.id}`}
             >
-              <div className={`h-44 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-                <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.08),transparent)]" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-mono text-white/50 uppercase tracking-wider">{project.category}</span>
+              <div className={`h-40 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                {project.featured && (
+                  <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 bg-background/70 backdrop-blur rounded-full border border-amber-400/30">
+                    <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                    <span className="text-[10px] font-medium text-amber-400">Featured</span>
                   </div>
-                  <div className="flex gap-2" onClick={e => e.stopPropagation()}>
-                    <a href={project.github || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
-                      <Github className="w-3.5 h-3.5" />
-                    </a>
-                    <a href={project.demo || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
+                )}
+                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.08),transparent)]" />
+                <div className="absolute bottom-3 right-3 flex gap-1.5" onClick={e => e.stopPropagation()}>
+                  <a href={project.github || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
+                    <Github className="w-3.5 h-3.5" />
+                  </a>
+                  <a href={project.demo || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-1">{project.title}</h3>
-                <p className="text-primary/80 text-xs font-medium mb-3">{project.subtitle}</p>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
+
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-white">{project.title}</h3>
+                  <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border flex-shrink-0 ${project.tagColor}`}>
+                    {project.tag.split(" ")[0]}
+                  </span>
+                </div>
+                <p className="text-muted-foreground text-xs mb-3 line-clamp-2 leading-relaxed">
                   {project.descShort}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -219,7 +252,7 @@ export default function Projects() {
               exit={{ scale: 0.92, y: 24, opacity: 0 }}
               transition={{ ease: [0.16, 1, 0.3, 1] }}
               onClick={e => e.stopPropagation()}
-              className="bg-card w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 shadow-2xl relative"
+              className="bg-card w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-3xl border border-white/10 shadow-2xl relative"
             >
               <button
                 onClick={() => setSelectedProject(null)}
@@ -229,32 +262,27 @@ export default function Projects() {
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              <div className={`h-52 md:h-64 w-full bg-gradient-to-br ${selectedProject.gradient} relative`}>
+              <div className={`h-48 w-full bg-gradient-to-br ${selectedProject.gradient} relative`}>
                 <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
+                <div className="absolute bottom-4 left-6">
+                  <span className={`text-xs font-medium px-3 py-1 rounded-full border ${selectedProject.tagColor}`}>
+                    {selectedProject.tag}
+                  </span>
+                </div>
               </div>
 
-              <div className="px-8 md:px-12 pb-12 -mt-12 relative z-10">
-                <div className="glass-card rounded-2xl p-5 mb-8 inline-block">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">{selectedProject.title}</h3>
-                  <p className="text-primary font-medium text-sm">{selectedProject.subtitle}</p>
-                </div>
+              <div className="px-8 pb-10 pt-6">
+                <h3 className="text-2xl font-bold text-white mb-1">{selectedProject.title}</h3>
+                <p className="text-primary text-sm font-medium mb-6">{selectedProject.subtitle}</p>
 
-                <div className="grid md:grid-cols-3 gap-10">
-                  <div className="md:col-span-2 space-y-8">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div className="md:col-span-2 space-y-6">
                     <div>
-                      <h4 className="text-base font-bold text-white mb-3">Overview</h4>
+                      <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wider font-mono">Overview</h4>
                       <p className="text-muted-foreground leading-relaxed text-sm">{selectedProject.descLong}</p>
                     </div>
                     <div>
-                      <h4 className="text-base font-bold text-white mb-3">Problem</h4>
-                      <p className="text-muted-foreground leading-relaxed text-sm">{selectedProject.problem}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-white mb-3">Solution</h4>
-                      <p className="text-muted-foreground leading-relaxed text-sm">{selectedProject.solution}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-white mb-3">Key Features</h4>
+                      <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wider font-mono">Key Features</h4>
                       <ul className="space-y-2">
                         {selectedProject.features.map((f, i) => (
                           <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm">
@@ -266,26 +294,20 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <div className="space-y-8">
+                  <div className="space-y-6">
                     <div>
-                      <h4 className="text-base font-bold text-white mb-3">Technologies</h4>
+                      <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wider font-mono">Technologies</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.stack.map(tech => (
-                          <span key={tech} className="glass-pill">{tech}</span>
+                          <span key={tech} className="glass-pill text-xs">{tech}</span>
                         ))}
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <a
-                        href={selectedProject.github || "#"}
-                        className="flex items-center justify-center gap-2 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-white text-sm font-medium w-full"
-                      >
+                    <div className="space-y-2">
+                      <a href={selectedProject.github || "#"} className="flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-white text-sm font-medium w-full">
                         <Github className="w-4 h-4" /> View Source
                       </a>
-                      <a
-                        href={selectedProject.demo || "#"}
-                        className="flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-background hover:opacity-90 transition-opacity text-sm font-semibold w-full"
-                      >
+                      <a href={selectedProject.demo || "#"} className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-background hover:opacity-90 transition-opacity text-sm font-semibold w-full">
                         <ExternalLink className="w-4 h-4" /> Live Demo
                       </a>
                     </div>
