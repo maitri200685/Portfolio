@@ -61,7 +61,7 @@ export default function Contact() {
     { icon: Mail,     label: "Email",    value: EMAIL,                         href: `mailto:${EMAIL}` },
     { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/maitri-prajapati", href: LINKEDIN_URL },
     { icon: Github,   label: "GitHub",   value: "github.com/maitri200685",    href: GITHUB_URL },
-    { icon: MapPin,   label: "Location", value: "Gujarat, India",              href: "#" },
+    { icon: MapPin,   label: "Location", value: "Gandhinagar, Gujarat, India",              href: "#" },
   ];
 
   return (

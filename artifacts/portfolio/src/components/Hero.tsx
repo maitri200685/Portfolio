@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 
 export default function Hero() {
-  const titles = ["IT Engineering Student", "Full Stack Developer", "UI Designer", "AI Developer"];
+  const titles = ["IT Engineering Student", "Full Stack Developer", "Data Science", "AI Developer"];
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground font-mono text-base tracking-[0.2em] uppercase"
           >
-            Innovation &amp; Craftsmanship
+            
           </motion.p>
 
           <h1 className="text-6xl md:text-7xl font-bold font-display tracking-tight text-white leading-[1.08]">
-            I'm <span className="text-gradient">Maitri</span><br />
+            <span className="text-gradient">Maitri</span><br />
             Prajapati
           </h1>
 
@@ -51,14 +51,14 @@ export default function Hero() {
           </div>
 
           <p className="text-muted-foreground max-w-md leading-relaxed text-lg font-light">
-            Welcome to my portfolio. I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
+            I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
             <a
               href="#contact"
               data-testid="button-contact"
-              className="magnetic-btn px-7 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-background font-semibold text-base hover:opacity-90 transition-opacity"
+              className="magnetic-btn px-7 py-3 rounded-full border border-primary/40 text-white font-semibold text-base hover:bg-primary/10 transition-colors flex items-center gap-2"
             >
               Contact Me
             </a>
@@ -72,9 +72,7 @@ export default function Hero() {
 
           <div className="flex items-center gap-5 pt-4">
             {[
-              { Icon: Github, label: "GitHub", href: "https://github.com/maitri200685" },
-              { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/maitri-prajapati-140b74317" },
-              { Icon: Mail, label: "Email", href: "mailto:maitri2k6@gmail.com" },
+              
             ].map(({ Icon, label, href }) => (
               <a
                 key={label}
