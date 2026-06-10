@@ -32,9 +32,9 @@ export default function Hero() {
             
           </motion.p>
 
-          <h1 className="text-6xl md:text-7xl font-bold font-display tracking-tight text-white leading-[1.08]">
-            <span className="text-gradient">Maitri</span><br />
-            Prajapati
+          <h1 className="text-7xl md:text-8xl font-bold font-display tracking-tight text-white leading-[1.08] uppercase">
+            <span className="text-gradient">MAITRI</span><br />
+            PRAJAPATI
           </h1>
 
           <div className="h-10 relative overflow-hidden">
@@ -44,13 +44,13 @@ export default function Hero() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -36, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl md:text-2xl text-primary font-medium absolute"
+              className="text-2xl md:text-3xl text-primary font-medium absolute"
             >
               {titles[titleIndex]}
             </motion.p>
           </div>
 
-          <p className="text-muted-foreground max-w-md leading-relaxed text-lg font-light">
+          <p className="text-muted-foreground max-w-md leading-relaxed text-xl font-light">
             I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
           </p>
 
@@ -79,7 +79,7 @@ export default function Hero() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                data-testid={`link-${(label as string).toLowerCase()}`}
+                data-testid={`link-${label.toLowerCase()}`}
                 className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 transition-all duration-200"
               >
                 <Icon className="w-5 h-5" />
