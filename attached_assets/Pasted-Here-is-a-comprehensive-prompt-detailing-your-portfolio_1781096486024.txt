@@ -1,0 +1,73 @@
+Here is a comprehensive prompt detailing your portfolio's structure, content, and interactive systems. You can share this with other developers or AI assistants to help them understand and edit your site while maintaining its core functionality.
+
+Portfolio Overview & Structure Prompt
+
+Role & Identity
+
+Name: Maitri Prajapati
+Titles: IT Engineering Student | Full Stack Developer | UI Designer
+Tagline: "Innovation & Craftsmanship"
+Mission: "Building intelligent systems that turn ideas into impact. Focus on clean code, user-centric design, and creating software that feels truly intelligent."
+Page Navigation System
+
+Single Page Layout: The site is a continuous scroll experience with the following sections:
+Home (#home)
+About (#about)
+Skills (#skills)
+Work (#projects)
+Contact (#contact)
+Navbar Behavior:
+Sticky top navigation that changes from transparent to a glassmorphism effect on scroll.
+Active section highlighting (auto-updates as you scroll).
+Desktop: Centered links with a "Let's Connect" magnetic button.
+Mobile: Hamburger menu with "Hire Me" primary action.
+Section-by-Section Content
+
+Hero Section
+
+Headline: "I'm Maitri Prajapati" (with gradient text effect).
+Description: Crafting high-performance digital experiences and turning complex problems into elegant solutions.
+Primary Buttons:
+"Download Resume" (triggers PDF download).
+"Contact Me" (smooth scrolls to contact section).
+Social Integration: Quick links for LinkedIn, GitHub, and Email.
+About & Journey
+
+Narrative: Focuses on engineering curiosity and the "why" behind code.
+Stats Cards: Highlights "10+ Shipped Projects" and "Top 8 National Hackathon".
+Interactive Timeline:
+2021-Present: Engineering Journey
+2022: Technology Exploration
+2023: Web Development (React/Next.js)
+2023-2024: AI Development (ML integration)
+2024+: Future Vision (AI-driven ecosystems)
+Skills Expertise
+
+Categorization System: Filterable skill cards by:
+Programming: Python, Java, JavaScript, C.
+Web: HTML, CSS, React, Next.js.
+AI & Data: Machine Learning, Data Science, Artificial Intelligence.
+Tools: GitHub, VS Code, Figma, Canva.
+Visuals: Each skill includes a proficiency percentage and a representative icon.
+Project Gallery (Work)
+
+Filtering & Search: Users can filter by category (AI, Web, etc.) or search by title/tech stack.
+Featured Projects:
+JARVIS AI Assistant: Personal brain ecosystem (Python, FastAPI, React).
+CivicTrack: Public works tracking platform (Next.js, Firebase).
+Skill Swap: Peer-to-peer knowledge exchange (React, Express, MongoDB).
+Soil Moisture Analysis: IoT & ML irrigation optimization (Python, TensorFlow).
+Interaction: Clicking a project card opens a detailed Modal showing the specific Problem, Solution, and Features of the project.
+Contact System
+
+Info Panel: Direct links for Email, Phone, and Location (Gujarat, India).
+Contact Form: Fields for Name, Email, Phone, Subject, and Message.
+States: Includes "Sending", "Success" (with auto-reset), and "Error" feedback states.
+Footer: Social follow buttons (GitHub, LinkedIn, Instagram).
+Interactive Components
+
+Magnetic Buttons: Primary action buttons use a magnetic hover effect to follow the cursor.
+Glassmorphism: All cards, modals, and the navbar use a consistent semi-transparent "glass" effect with subtle borders.
+Custom Cursor: A specialized cursor follows the user throughout the site.
+Background Effects: Global neural network and particle animations that respond to section changes.
+How to use this prompt: "Please use the details above to edit or enhance the existing sections. Ensure that the anchor link navigation (#) remains functional, the magnetic button physics are preserved, and the project modal logic continues to display the specific Problem/Solution/Features for each entry."

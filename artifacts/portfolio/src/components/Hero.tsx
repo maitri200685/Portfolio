@@ -2,17 +2,34 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 
-interface SphereNode {
-  x: number;
-  y: number;
-  z: number;
-  vx: number;
-  vy: number;
-  vz: number;
-  radius: number;
+const CUBE_VERTS: [number, number, number][] = [
+  [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+  [-1, -1,  1], [1, -1,  1], [1, 1,  1], [-1, 1,  1],
+];
+const CUBE_EDGES: [number, number][] = [
+  [0,1],[1,2],[2,3],[3,0],
+  [4,5],[5,6],[6,7],[7,4],
+  [0,4],[1,5],[2,6],[3,7],
+];
+
+function rotate(v: [number,number,number], rx: number, ry: number): [number,number,number] {
+  let [x, y, z] = v;
+  const cy = Math.cos(ry), sy = Math.sin(ry);
+  [x, z] = [x * cy - z * sy, x * sy + z * cy];
+  const cx = Math.cos(rx), sx = Math.sin(rx);
+  [y, z] = [y * cx - z * sx, y * sx + z * cx];
+  return [x, y, z];
 }
 
-function NeuralSphere() {
+function project(v: [number,number,number], cx: number, cy: number, scale: number) {
+  const fov = 4;
+  const s = fov / (fov + v[2]);
+  return { x: cx + v[0] * scale * s, y: cy + v[1] * scale * s, z: v[2], s };
+}
+
+interface Particle { angle: number; r: number; speed: number; label: string; opacity: number }
+
+function ITScene() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -22,52 +39,25 @@ function NeuralSphere() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const W = canvas.offsetWidth;
-    const H = canvas.offsetHeight;
+    const W = canvas.offsetWidth || 480;
+    const H = canvas.offsetHeight || 480;
     canvas.width = W;
     canvas.height = H;
 
-    const cx = W / 2;
-    const cy = H / 2;
-    const R = Math.min(W, H) * 0.34;
-    const NODE_COUNT = 60;
-    const MAX_CONN_DIST = 0.55;
+    const cx = W / 2, cy = H / 2;
+    const scale = Math.min(W, H) * 0.22;
 
-    const nodes: SphereNode[] = [];
-    for (let i = 0; i < NODE_COUNT; i++) {
-      const theta = Math.acos(2 * Math.random() - 1);
-      const phi = Math.random() * Math.PI * 2;
-      nodes.push({
-        x: Math.sin(theta) * Math.cos(phi),
-        y: Math.sin(theta) * Math.sin(phi),
-        z: Math.cos(theta),
-        vx: (Math.random() - 0.5) * 0.003,
-        vy: (Math.random() - 0.5) * 0.003,
-        vz: (Math.random() - 0.5) * 0.003,
-      } as SphereNode & { radius: number });
-    }
+    const LABELS = ["01","10","AI","</>","{}","API","ML","SSH","git","npm","{ }","if()","λ","∑","0x1F"];
+    const particles: Particle[] = Array.from({ length: 18 }, (_, i) => ({
+      angle: (i / 18) * Math.PI * 2,
+      r: scale * (1.5 + Math.random() * 0.8),
+      speed: (Math.random() > 0.5 ? 1 : -1) * (0.004 + Math.random() * 0.006),
+      label: LABELS[i % LABELS.length],
+      opacity: 0.2 + Math.random() * 0.35,
+    }));
 
-    let rotY = 0;
-    let rotX = 0;
+    let rx = 0.4, ry = 0;
     let rafId: number;
-    let t = 0;
-
-    const project = (x: number, y: number, z: number, rx: number, ry: number) => {
-      const cosY = Math.cos(ry), sinY = Math.sin(ry);
-      const cosX = Math.cos(rx), sinX = Math.sin(rx);
-      let x1 = x * cosY - z * sinY;
-      let z1 = x * sinY + z * cosY;
-      let y1 = y * cosX - z1 * sinX;
-      let z2 = y * sinX + z1 * cosX;
-      const fov = 3.5;
-      const scale = fov / (fov + z2 + 1);
-      return {
-        px: cx + x1 * R * scale,
-        py: cy + y1 * R * scale,
-        z: z2,
-        scale,
-      };
-    };
 
     const onMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -76,86 +66,93 @@ function NeuralSphere() {
         y: (e.clientY - rect.top - H / 2) / H,
       };
     };
-    canvas.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove", onMouseMove);
 
     const draw = () => {
-      t += 0.008;
-      rotY += 0.004 + mouseRef.current.x * 0.006;
-      rotX += 0.001 + mouseRef.current.y * 0.003;
-
       ctx.clearRect(0, 0, W, H);
 
-      // Ambient glow behind sphere
-      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.1);
-      grd.addColorStop(0, "rgba(180,142,255,0.06)");
-      grd.addColorStop(0.5, "rgba(255,182,230,0.03)");
+      ry += 0.008 + mouseRef.current.x * 0.005;
+      rx += 0.003 + mouseRef.current.y * 0.002;
+
+      // Ambient glow
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, scale * 1.6);
+      grd.addColorStop(0, "rgba(180,142,255,0.07)");
+      grd.addColorStop(0.6, "rgba(255,182,230,0.03)");
       grd.addColorStop(1, "transparent");
       ctx.fillStyle = grd;
       ctx.beginPath();
-      ctx.arc(cx, cy, R * 1.1, 0, Math.PI * 2);
+      ctx.arc(cx, cy, scale * 1.6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Project all nodes
-      const projected = nodes.map((n) => project(n.x, n.y, n.z, rotX, rotY));
+      // Project vertices
+      const verts = CUBE_VERTS.map(v => project(rotate(v, rx, ry), cx, cy, scale));
 
-      // Draw connections
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dz = nodes[i].z - nodes[j].z;
-          const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-          if (d < MAX_CONN_DIST) {
-            const pi = projected[i];
-            const pj = projected[j];
-            const depthFactor = ((pi.z + pj.z) / 2 + 1) / 2;
-            const alpha = (1 - d / MAX_CONN_DIST) * 0.5 * depthFactor;
-            const purple = Math.round(150 + depthFactor * 50);
-            ctx.strokeStyle = `rgba(${purple},142,255,${alpha})`;
-            ctx.lineWidth = 0.7 * pi.scale;
-            ctx.beginPath();
-            ctx.moveTo(pi.px, pi.py);
-            ctx.lineTo(pj.px, pj.py);
-            ctx.stroke();
-          }
+      // Draw edges — back first, then front for depth
+      const sortedEdges = CUBE_EDGES.map(([a, b]) => ({
+        a, b,
+        avgZ: (verts[a].z + verts[b].z) / 2
+      })).sort((x, y) => x.avgZ - y.avgZ);
+
+      for (const { a, b, avgZ } of sortedEdges) {
+        const va = verts[a], vb = verts[b];
+        const depthAlpha = 0.15 + ((avgZ + 1) / 2) * 0.65;
+        const isPurple = avgZ > 0;
+        ctx.strokeStyle = isPurple
+          ? `rgba(180,142,255,${depthAlpha})`
+          : `rgba(255,182,230,${depthAlpha * 0.7})`;
+        ctx.lineWidth = 0.8 + (avgZ + 1) * 0.4;
+        ctx.beginPath();
+        ctx.moveTo(va.x, va.y);
+        ctx.lineTo(vb.x, vb.y);
+        ctx.stroke();
+      }
+
+      // Draw corner nodes
+      for (const v of verts) {
+        const depthAlpha = 0.3 + ((v.z + 1) / 2) * 0.7;
+        const r = (2.5 + v.s * 2.5);
+        const glow = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, r * 3);
+        glow.addColorStop(0, `rgba(180,142,255,${depthAlpha * 0.5})`);
+        glow.addColorStop(1, "transparent");
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, r * 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(230,217,255,${depthAlpha})`;
+        ctx.fill();
+      }
+
+      // Circuit traces — short lines extending from top/bottom face centers
+      const faceGroups: number[][] = [[0,1,2,3],[4,5,6,7]];
+      for (const face of faceGroups) {
+        const fx = face.reduce((s, i) => s + verts[i].x, 0) / 4;
+        const fy = face.reduce((s, i) => s + verts[i].y, 0) / 4;
+        const fz = face.reduce((s, i) => s + verts[i].z, 0) / 4;
+        const alpha = 0.1 + ((fz + 1) / 2) * 0.2;
+        ctx.strokeStyle = `rgba(180,142,255,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.setLineDash([3, 5]);
+        for (let i = 0; i < 4; i++) {
+          const ang = (i / 4) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.moveTo(fx, fy);
+          ctx.lineTo(fx + Math.cos(ang) * scale * 0.5, fy + Math.sin(ang) * scale * 0.3);
+          ctx.stroke();
         }
+        ctx.setLineDash([]);
       }
 
-      // Draw nodes
-      for (let i = 0; i < nodes.length; i++) {
-        const p = projected[i];
-        const depthFactor = (p.z + 1) / 2;
-        const r = (2 + depthFactor * 3) * p.scale;
-        const alpha = 0.5 + depthFactor * 0.5;
-
-        // Glow
-        const glowGrd = ctx.createRadialGradient(p.px, p.py, 0, p.px, p.py, r * 3);
-        glowGrd.addColorStop(0, `rgba(180,142,255,${alpha * 0.3})`);
-        glowGrd.addColorStop(1, "transparent");
-        ctx.fillStyle = glowGrd;
-        ctx.beginPath();
-        ctx.arc(p.px, p.py, r * 3, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Core dot
-        ctx.beginPath();
-        ctx.arc(p.px, p.py, r, 0, Math.PI * 2);
-        const c = i % 3 === 0 ? `rgba(255,182,230,${alpha})` : `rgba(180,142,255,${alpha})`;
-        ctx.fillStyle = c;
-        ctx.fill();
-      }
-
-      // Floating data particles
-      for (let k = 0; k < 12; k++) {
-        const angle = (k / 12) * Math.PI * 2 + t * 0.4;
-        const radius = R * (0.7 + 0.35 * Math.sin(t * 0.7 + k));
-        const px2 = cx + Math.cos(angle) * radius;
-        const py2 = cy + Math.sin(angle) * radius * 0.55;
-        const alpha = 0.2 + 0.2 * Math.sin(t + k);
-        ctx.beginPath();
-        ctx.arc(px2, py2, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,182,230,${alpha})`;
-        ctx.fill();
+      // Orbiting code particles
+      for (const p of particles) {
+        p.angle += p.speed;
+        const px = cx + Math.cos(p.angle) * p.r;
+        const py = cy + Math.sin(p.angle) * p.r * 0.55;
+        ctx.font = "10px Menlo, monospace";
+        ctx.fillStyle = `rgba(180,142,255,${p.opacity})`;
+        ctx.fillText(p.label, px - ctx.measureText(p.label).width / 2, py);
       }
 
       rafId = requestAnimationFrame(draw);
@@ -165,131 +162,134 @@ function NeuralSphere() {
 
     return () => {
       cancelAnimationFrame(rafId);
-      canvas.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full"
-      style={{ display: "block" }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full" style={{ display: "block" }} />;
 }
 
 export default function Hero() {
-  const titles = ["Full Stack Developer", "AI Engineer", "Cloud Architect", "IT Engineer"];
+  const titles = ["IT Engineering Student", "Full Stack Developer", "UI Designer", "AI Developer"];
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTitleIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
+    }, 2800);
     return () => clearInterval(interval);
   }, [titles.length]);
 
   return (
-    <section id="hero" className="min-h-screen relative flex items-center pt-20">
+    <section id="home" className="min-h-screen relative flex items-center pt-20">
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-6"
         >
-          <p className="text-muted-foreground font-mono text-sm tracking-wider">Hello, I'm</p>
-          <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight text-white">
-            Isaac <br />
-            <span className="text-gradient">Engineer</span>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground font-mono text-sm tracking-[0.2em] uppercase"
+          >
+            Innovation &amp; Craftsmanship
+          </motion.p>
+
+          <h1 className="text-5xl md:text-6xl font-bold font-display tracking-tight text-white leading-[1.08]">
+            I'm <span className="text-gradient">Maitri</span><br />
+            Prajapati
           </h1>
 
           <div className="h-8 relative overflow-hidden">
             <motion.p
               key={titleIndex}
-              initial={{ y: 30, opacity: 0 }}
+              initial={{ y: 28, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -30, opacity: 0 }}
-              className="text-xl md:text-2xl text-primary font-medium absolute"
+              exit={{ y: -28, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg md:text-xl text-primary font-medium absolute"
             >
               {titles[titleIndex]}
             </motion.p>
           </div>
 
-          <p className="text-muted-foreground max-w-md leading-relaxed text-lg font-light">
-            I build scalable digital products at the intersection of software engineering and AI. Based globally, working everywhere.
+          <p className="text-muted-foreground max-w-md leading-relaxed text-base font-light">
+            Building intelligent systems that turn ideas into impact. Focus on clean code, user-centric design, and software that feels truly intelligent.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-wrap gap-4 pt-2">
             <a
               href="#contact"
               data-testid="button-contact"
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-background font-medium hover:opacity-90 transition-opacity"
+              className="magnetic-btn px-7 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-background font-semibold text-sm hover:opacity-90 transition-opacity"
             >
-              Get In Touch
+              Contact Me
             </a>
             <button
               data-testid="button-resume"
-              className="px-6 py-3 rounded-full border border-primary/50 text-white font-medium hover:bg-primary/10 transition-colors flex items-center gap-2"
+              className="magnetic-btn px-7 py-3 rounded-full border border-primary/40 text-white font-semibold text-sm hover:bg-primary/10 transition-colors flex items-center gap-2"
             >
               <Download className="w-4 h-4" /> Download Resume
             </button>
           </div>
 
-          <div className="flex items-center gap-6 pt-8">
+          <div className="flex items-center gap-5 pt-4">
             {[
               { Icon: Github, label: "GitHub", href: "#" },
               { Icon: Linkedin, label: "LinkedIn", href: "#" },
-              { Icon: Mail, label: "Email", href: "#" },
+              { Icon: Mail, label: "Email", href: "mailto:maitri@example.com" },
             ].map(({ Icon, label, href }) => (
               <a
                 key={label}
                 href={href}
                 data-testid={`link-${label.toLowerCase()}`}
-                className="text-muted-foreground hover:text-white transition-colors hover:scale-110 transform duration-200"
+                className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 transition-all duration-200"
               >
-                <Icon className="w-6 h-6" />
+                <Icon className="w-4 h-4" />
               </a>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="h-[500px] w-full relative hidden md:flex items-center justify-center"
+          transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="h-[460px] w-full relative hidden md:flex items-center justify-center"
         >
           <div className="absolute inset-0">
-            <NeuralSphere />
+            <ITScene />
           </div>
 
           {/* Floating glass cards */}
           <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-8 right-4 glass-card p-4 rounded-xl z-10"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-8 right-2 glass-card px-4 py-3 rounded-xl z-10"
           >
-            <p className="text-xs font-mono text-primary">Status</p>
-            <p className="text-sm font-medium text-white">All Systems Go</p>
+            <p className="text-[10px] font-mono text-primary/70 mb-0.5">Status</p>
+            <p className="text-sm font-semibold text-white">Open to Work</p>
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-16 left-4 glass-card p-4 rounded-xl z-10"
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-14 left-2 glass-card px-4 py-3 rounded-xl z-10"
           >
-            <p className="text-xs font-mono text-secondary">Stack</p>
-            <p className="text-sm font-medium text-white font-mono">React · Python · Cloud</p>
+            <p className="text-[10px] font-mono text-secondary/70 mb-0.5">Hackathon</p>
+            <p className="text-sm font-semibold text-white">Top 8 National</p>
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-1/3 left-2 glass-card px-3 py-2 rounded-lg z-10"
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-1/2 -translate-y-1/2 left-0 glass-card px-3 py-2 rounded-lg z-10"
           >
-            <p className="text-xs font-mono text-primary/80">{"<AI />"}</p>
+            <p className="text-xs font-mono text-primary/80">10+ Projects</p>
           </motion.div>
         </motion.div>
 
