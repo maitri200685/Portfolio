@@ -24,15 +24,15 @@ export default function Background() {
     resize();
     window.addEventListener("resize", resize);
 
-    const NODE_COUNT = 80;
-    const MAX_DIST = 160;
+    const NODE_COUNT = 100;
+    const MAX_DIST = 180;
 
     const nodes: Node[] = Array.from({ length: NODE_COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,
-      radius: Math.random() * 2 + 1,
+      radius: Math.random() * 3 + 1.5,
     }));
 
     let rafId: number;
@@ -53,13 +53,13 @@ export default function Background() {
           const dy = m.y - n.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.08;
+            const alpha = (1 - dist / MAX_DIST) * 0.18;
             const t = i / nodes.length;
             const r = Math.round(180 + t * 75);
             const g = Math.round(142 + t * 30);
             const b = 255;
             ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 1.2;
             ctx.beginPath();
             ctx.moveTo(n.x, n.y);
             ctx.lineTo(m.x, m.y);
@@ -69,7 +69,7 @@ export default function Background() {
 
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180,142,255,0.12)`;
+        ctx.fillStyle = `rgba(180,142,255,0.35)`;
         ctx.fill();
       }
 
@@ -88,7 +88,7 @@ export default function Background() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
-      style={{ opacity: 0.7 }}
+      style={{ opacity: 1.0 }}
     />
   );
 }

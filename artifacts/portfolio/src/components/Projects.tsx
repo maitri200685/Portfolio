@@ -142,10 +142,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 text-white">
             Featured <span className="text-gradient">Work</span>
           </h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
 
         {/* Filter + Search */}
@@ -156,7 +156,7 @@ export default function Projects() {
                 key={c}
                 onClick={() => setActiveFilter(c)}
                 data-testid={`project-filter-${c.toLowerCase()}`}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+                className={`px-4 py-1.5 rounded-full text-base font-medium transition-all duration-200 border ${
                   activeFilter === c
                     ? "bg-primary text-background border-primary"
                     : "border-white/10 text-muted-foreground hover:border-primary/40 hover:text-white bg-transparent"
@@ -167,14 +167,14 @@ export default function Projects() {
             ))}
           </div>
           <div className="relative flex-1 max-w-xs">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search by title or tech..."
               value={search}
               onChange={e => setSearch(e.target.value)}
               data-testid="input-project-search"
-              className="w-full pl-9 pr-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+              className="w-full pl-10 pr-4 py-3 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
             />
           </div>
         </div>
@@ -194,40 +194,40 @@ export default function Projects() {
               }`}
               data-testid={`card-project-${project.id}`}
             >
-              <div className={`h-40 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+              <div className={`h-48 w-full bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                 {project.featured && (
-                  <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 bg-background/70 backdrop-blur rounded-full border border-amber-400/30">
-                    <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                    <span className="text-[10px] font-medium text-amber-400">Featured</span>
+                  <div className="absolute top-3 left-3 flex items-center gap-1 px-3 py-1.5 bg-background/70 backdrop-blur rounded-full border border-amber-400/30">
+                    <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                    <span className="text-xs font-medium text-amber-400">Featured</span>
                   </div>
                 )}
                 <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_40%_60%,rgba(255,255,255,0.08),transparent)]" />
                 <div className="absolute bottom-3 right-3 flex gap-1.5" onClick={e => e.stopPropagation()}>
-                  <a href={project.github || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
-                    <Github className="w-3.5 h-3.5" />
+                  <a href={project.github || "#"} className="p-2 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
+                    <Github className="w-4.5 h-4.5" />
                   </a>
-                  <a href={project.demo || "#"} className="p-1.5 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
-                    <ExternalLink className="w-3.5 h-3.5" />
+                  <a href={project.demo || "#"} className="p-2 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
+                    <ExternalLink className="w-4.5 h-4.5" />
                   </a>
                 </div>
               </div>
 
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="text-base font-bold text-white">{project.title}</h3>
-                  <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border flex-shrink-0 ${project.tagColor}`}>
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <h3 className="text-lg font-bold text-white">{project.title}</h3>
+                  <span className={`text-xs font-medium px-3 py-1 rounded-full border flex-shrink-0 ${project.tagColor}`}>
                     {project.tag.split(" ")[0]}
                   </span>
                 </div>
-                <p className="text-muted-foreground text-xs mb-3 line-clamp-2 leading-relaxed">
+                <p className="text-muted-foreground text-sm mb-3 line-clamp-2 leading-relaxed">
                   {project.descShort}
                 </p>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {project.stack.slice(0, 3).map(tech => (
-                    <span key={tech} className="glass-pill text-[10px] py-0.5">{tech}</span>
+                    <span key={tech} className="glass-pill text-xs py-1">{tech}</span>
                   ))}
                   {project.stack.length > 3 && (
-                    <span className="glass-pill text-[10px] py-0.5">+{project.stack.length - 3}</span>
+                    <span className="glass-pill text-xs py-1">+{project.stack.length - 3}</span>
                   )}
                 </div>
               </div>
@@ -257,36 +257,36 @@ export default function Projects() {
               <button
                 onClick={() => setSelectedProject(null)}
                 data-testid="button-close-modal"
-                className="absolute top-5 right-5 z-20 p-2 rounded-full bg-white/8 hover:bg-white/15 transition-colors"
+                className="absolute top-5 right-5 z-20 p-2.5 rounded-full bg-white/8 hover:bg-white/15 transition-colors"
               >
-                <X className="w-5 h-5 text-white" />
+                <X className="w-6 h-6 text-white" />
               </button>
 
-              <div className={`h-48 w-full bg-gradient-to-br ${selectedProject.gradient} relative`}>
+              <div className={`h-56 w-full bg-gradient-to-br ${selectedProject.gradient} relative`}>
                 <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                <div className="absolute bottom-4 left-6">
-                  <span className={`text-xs font-medium px-3 py-1 rounded-full border ${selectedProject.tagColor}`}>
+                <div className="absolute bottom-5 left-7">
+                  <span className={`text-sm font-medium px-4 py-1.5 rounded-full border ${selectedProject.tagColor}`}>
                     {selectedProject.tag}
                   </span>
                 </div>
               </div>
 
-              <div className="px-8 pb-10 pt-6">
-                <h3 className="text-2xl font-bold text-white mb-1">{selectedProject.title}</h3>
-                <p className="text-primary text-sm font-medium mb-6">{selectedProject.subtitle}</p>
+              <div className="px-9 pb-11 pt-7">
+                <h3 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h3>
+                <p className="text-primary text-base font-medium mb-7">{selectedProject.subtitle}</p>
 
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="md:col-span-2 space-y-6">
+                <div className="grid md:grid-cols-3 gap-9">
+                  <div className="md:col-span-2 space-y-7">
                     <div>
-                      <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wider font-mono">Overview</h4>
-                      <p className="text-muted-foreground leading-relaxed text-sm">{selectedProject.descLong}</p>
+                      <h4 className="text-base font-bold text-white mb-3 uppercase tracking-wider font-mono">Overview</h4>
+                      <p className="text-muted-foreground leading-relaxed text-base">{selectedProject.descLong}</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wider font-mono">Key Features</h4>
-                      <ul className="space-y-2">
+                      <h4 className="text-base font-bold text-white mb-4 uppercase tracking-wider font-mono">Key Features</h4>
+                      <ul className="space-y-3">
                         {selectedProject.features.map((f, i) => (
-                          <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                          <li key={i} className="flex items-start gap-3 text-muted-foreground text-base">
+                            <span className="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
                             {f}
                           </li>
                         ))}
@@ -294,21 +294,21 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <div className="space-y-6">
+                  <div className="space-y-7">
                     <div>
-                      <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wider font-mono">Technologies</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <h4 className="text-base font-bold text-white mb-4 uppercase tracking-wider font-mono">Technologies</h4>
+                      <div className="flex flex-wrap gap-2.5">
                         {selectedProject.stack.map(tech => (
-                          <span key={tech} className="glass-pill text-xs">{tech}</span>
+                          <span key={tech} className="glass-pill text-sm">{tech}</span>
                         ))}
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <a href={selectedProject.github || "#"} className="flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-white text-sm font-medium w-full">
-                        <Github className="w-4 h-4" /> View Source
+                    <div className="space-y-2.5">
+                      <a href={selectedProject.github || "#"} className="flex items-center justify-center gap-2 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-white text-base font-medium w-full">
+                        <Github className="w-5 h-5" /> View Source
                       </a>
-                      <a href={selectedProject.demo || "#"} className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-background hover:opacity-90 transition-opacity text-sm font-semibold w-full">
-                        <ExternalLink className="w-4 h-4" /> Live Demo
+                      <a href={selectedProject.demo || "#"} className="flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-background hover:opacity-90 transition-opacity text-base font-semibold w-full">
+                        <ExternalLink className="w-5 h-5" /> Live Demo
                       </a>
                     </div>
                   </div>

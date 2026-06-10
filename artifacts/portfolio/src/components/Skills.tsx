@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, Brain, Wrench, Database, Sparkles } from "lucide-react";
+import { Code2, Brain, Wrench, Database } from "lucide-react";
 
 const categories = [
   {
@@ -27,13 +27,6 @@ const categories = [
     icon: Database,
     skills: ["MySQL", "PostgreSQL"],
   },
-  {
-    id: "learning",
-    title: "Currently Learning",
-    icon: Sparkles,
-    skills: ["Deep Learning", "Advanced React", "Unity Game Development", "Cloud Computing", "AI Model Deployment", "Digital Marketing"],
-    isLearning: true,
-  },
 ];
 
 const FILTERS = [
@@ -42,7 +35,6 @@ const FILTERS = [
   { label: "AI & ML",       id: "ai" },
   { label: "Tools",         id: "tools" },
   { label: "Databases",     id: "databases" },
-  { label: "Learning",      id: "learning" },
 ];
 
 const container = {
@@ -68,10 +60,10 @@ export default function Skills() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 text-white">
             Skills &amp; <span className="text-gradient">Expertise</span>
           </h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
 
         {/* Filter pills */}
@@ -81,7 +73,7 @@ export default function Skills() {
               key={f.id}
               onClick={() => setActive(f.id)}
               data-testid={`filter-${f.id}`}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+              className={`px-4 py-1.5 rounded-full text-base font-medium transition-all duration-200 border ${
                 active === f.id
                   ? "bg-primary text-background border-primary"
                   : "border-white/10 text-muted-foreground hover:border-primary/40 hover:text-white bg-transparent"
@@ -104,31 +96,20 @@ export default function Skills() {
               key={cat.id}
               variants={item}
               whileHover={{ scale: 1.02, rotateY: 3, rotateX: -2 }}
-              className={`glass-card p-6 rounded-2xl group hover:border-primary/40 transition-all duration-300 ${
-                cat.isLearning ? "border-secondary/20 md:col-span-2 xl:col-span-1" : ""
-              }`}
+              className={`glass-card p-7 rounded-2xl group hover:border-primary/40 transition-all duration-300`}
               style={{ transformStyle: "preserve-3d", perspective: "800px" }}
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`p-2.5 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors ${cat.isLearning ? "text-secondary" : "text-primary"}`}>
-                  <cat.icon className="w-5 h-5" />
+              <div className="flex items-center gap-3 mb-6">
+                <div className={`p-3 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors text-primary`}>
+                  <cat.icon className="w-6 h-6" />
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">{cat.title}</h3>
-                  {cat.isLearning && (
-                    <span className="text-[10px] font-mono text-secondary/70">In progress</span>
-                  )}
-                </div>
+                <h3 className="text-lg font-bold text-white">{cat.title}</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5">
                 {cat.skills.map((skill) => (
                   <span
                     key={skill}
-                    className={`text-xs px-3 py-1.5 rounded-full border transition-colors duration-200 group-hover:border-primary/30 ${
-                      cat.isLearning
-                        ? "bg-secondary/5 border-secondary/15 text-secondary/80"
-                        : "bg-white/4 border-white/10 text-muted-foreground"
-                    }`}
+                    className={`text-sm px-4 py-2 rounded-full border transition-colors duration-200 group-hover:border-primary/30 bg-white/4 border-white/10 text-muted-foreground`}
                   >
                     {skill}
                   </span>

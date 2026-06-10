@@ -128,6 +128,10 @@
     @apply border-border;
   }
 
+  html {
+    font-size: 18px;
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground;
     cursor: none;

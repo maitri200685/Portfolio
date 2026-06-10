@@ -62,10 +62,10 @@ export default function Achievements() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 text-white">
             Achievements &amp; <span className="text-gradient">Awards</span>
           </h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -77,20 +77,20 @@ export default function Achievements() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.07 }}
               whileHover={{ y: -5 }}
-              className="glass-card p-6 rounded-2xl relative overflow-hidden group"
+              className="glass-card p-7 rounded-2xl relative overflow-hidden group"
               data-testid={`card-achievement-${idx}`}
             >
               <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${item.accent} rounded-full blur-2xl -mr-8 -mt-8 group-hover:scale-150 transition-transform duration-500`} />
 
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`p-2.5 rounded-xl bg-white/5 border border-white/8 ${item.iconColor}`}>
-                    <item.icon className="w-5 h-5" />
+                  <div className={`p-3 rounded-xl bg-white/5 border border-white/8 ${item.iconColor}`}>
+                    <item.icon className="w-6 h-6" />
                   </div>
-                  <span className="text-xs font-mono text-white/30">{item.year}</span>
+                  <span className="text-sm font-mono text-white/30">{item.year}</span>
                 </div>
-                <h3 className="text-sm font-bold text-white mb-2 leading-snug">{item.title}</h3>
-                <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-bold text-white mb-2 leading-snug">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>
           ))}

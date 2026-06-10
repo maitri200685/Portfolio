@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, MapPin, Send, Instagram } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,13 +64,6 @@ export default function Contact() {
     { icon: MapPin,   label: "Location", value: "Gujarat, India",              href: "#" },
   ];
 
-  const socials = [
-    { icon: Github,    href: GITHUB_URL,   label: "GitHub" },
-    { icon: Linkedin,  href: LINKEDIN_URL, label: "LinkedIn" },
-    { icon: Instagram, href: "#",          label: "Instagram" },
-    { icon: Mail,      href: `mailto:${EMAIL}`, label: "Email" },
-  ];
-
   return (
     <section id="contact" className="py-24 relative z-10">
       <div className="container mx-auto px-6">
@@ -81,15 +74,15 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 text-white">
             Let's Build <span className="text-gradient">Something Together</span>
           </h2>
-          <div className="h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full" />
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-12">
 
-          {/* Left: info + socials */}
+          {/* Left: info */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -97,7 +90,7 @@ export default function Contact() {
             transition={{ ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-2 space-y-8"
           >
-            <p className="text-muted-foreground text-base leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
             </p>
 
@@ -112,33 +105,14 @@ export default function Contact() {
                   data-testid={`contact-info-${item.label.toLowerCase()}`}
                 >
                   <div className="p-3 rounded-xl bg-white/5 border border-white/8 group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300 flex-shrink-0">
-                    <item.icon className="w-5 h-5 text-primary" />
+                    <item.icon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs font-mono text-muted-foreground mb-0.5">{item.label}</p>
-                    <p className="text-white text-sm font-medium group-hover:text-primary transition-colors break-all">{item.value}</p>
+                    <p className="text-sm font-mono text-muted-foreground mb-0.5">{item.label}</p>
+                    <p className="text-white text-base font-medium group-hover:text-primary transition-colors break-all">{item.value}</p>
                   </div>
                 </a>
               ))}
-            </div>
-
-            <div>
-              <p className="text-xs font-mono text-muted-foreground mb-3 uppercase tracking-wider">Follow</p>
-              <div className="flex gap-3">
-                {socials.map(({ icon: Icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel="noreferrer"
-                    aria-label={label}
-                    data-testid={`social-${label.toLowerCase()}`}
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/8 transition-all duration-200"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ))}
-              </div>
             </div>
           </motion.div>
 
@@ -157,10 +131,10 @@ export default function Contact() {
                 className="flex flex-col items-center justify-center py-16 text-center gap-4"
               >
                 <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-2">
-                  <Send className="w-7 h-7 text-green-400" />
+                  <Send className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Message Sent!</h3>
-                <p className="text-muted-foreground text-sm max-w-xs">
+                <h3 className="text-2xl font-bold text-white">Message Sent!</h3>
+                <p className="text-muted-foreground text-base max-w-xs">
                   Thank you for reaching out. Your message has been sent successfully.
                 </p>
               </motion.div>
@@ -171,10 +145,10 @@ export default function Contact() {
                 className="flex flex-col items-center justify-center py-16 text-center gap-4"
               >
                 <div className="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center mb-2">
-                  <Mail className="w-7 h-7 text-red-400" />
+                  <Mail className="w-8 h-8 text-red-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Unable to Send</h3>
-                <p className="text-muted-foreground text-sm">Unable to send message. Please try again later.</p>
+                <h3 className="text-2xl font-bold text-white">Unable to Send</h3>
+                <p className="text-muted-foreground text-base">Unable to send message. Please try again later.</p>
               </motion.div>
             ) : (
               <Form {...form}>
@@ -184,11 +158,11 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-muted-foreground font-mono text-xs tracking-wider">FULL NAME</FormLabel>
+                        <FormLabel className="text-muted-foreground font-mono text-sm tracking-wider">FULL NAME</FormLabel>
                         <FormControl>
                           <Input
                             data-testid="input-name"
-                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl h-12"
+                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl h-14 text-base"
                             placeholder="Your full name"
                             {...field}
                           />
@@ -203,11 +177,11 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-muted-foreground font-mono text-xs tracking-wider">EMAIL ADDRESS</FormLabel>
+                        <FormLabel className="text-muted-foreground font-mono text-sm tracking-wider">EMAIL ADDRESS</FormLabel>
                         <FormControl>
                           <Input
                             data-testid="input-email"
-                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl h-12"
+                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl h-14 text-base"
                             placeholder="your@email.com"
                             {...field}
                           />
@@ -222,11 +196,11 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-muted-foreground font-mono text-xs tracking-wider">MESSAGE</FormLabel>
+                        <FormLabel className="text-muted-foreground font-mono text-sm tracking-wider">MESSAGE</FormLabel>
                         <FormControl>
                           <Textarea
                             data-testid="input-message"
-                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl min-h-[140px] resize-none"
+                            className="bg-background/50 border-white/10 focus:border-primary/50 text-white rounded-xl min-h-[160px] resize-none text-base"
                             placeholder="Tell me about your project or idea..."
                             {...field}
                           />
@@ -240,16 +214,16 @@ export default function Contact() {
                     type="submit"
                     disabled={state === "sending"}
                     data-testid="button-send-message"
-                    className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-background font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-60"
+                    className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-background font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-60 text-lg"
                   >
                     {state === "sending" ? (
                       <>
-                        <div className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin" />
+                        <div className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full animate-spin" />
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" /> Send Message
+                        <Send className="w-5 h-5" /> Send Message
                       </>
                     )}
                   </button>
