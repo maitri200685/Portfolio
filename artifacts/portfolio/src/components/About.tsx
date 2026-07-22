@@ -6,9 +6,9 @@ export default function About() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           <div className="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-primary/30 flex-shrink-0 z-20 -mb-12 lg:mb-0 lg:-mt-6">
-            <img 
-              src="/maitri-cutout.png" 
-              alt="Maitri Prajapati" 
+            <img
+              src="/maitri-cutout.png"
+              alt="Maitri Prajapati"
               className="w-full h-full object-cover"
             />
           </div>
@@ -41,11 +41,10 @@ export default function About() {
                     I'm Maitri Prajapati, an Information Technology Engineering student currently pursuing my Bachelor's degree at L.D. College of Engineering, Ahmedabad.
                   </p>
                   <p>
-                    Passionate about technology and innovation, I enjoy building digital solutions that combine creativity, problem-solving, and real-world impact. My interests span across Web Development, Artificial Intelligence, Machine Learning, Data Science, UI/UX Design, and Software Engineering.
+                    Passionate about technology and innovation, I enjoy building digital solutions that combine creativity, problem-solving, and real-world impact. My interests span across Full Stack Development, AIML, Data Science, and Software Engineering.
                   </p>
                   <p>
-                    Throughout my learning journey, I have worked on various projects including AI-powered assistants, civic-tech platforms, collaborative development tools, and intelligent automation systems. These experiences have strengthened my technical skills while helping me understand how technology can be used to solve practical challenges.
-                  </p>
+                    I enjoy building intelligent systems that solve real-world problems using AI while also developing modern, responsive web applications. My learning journey has focused on understanding not only how to build applications but also the underlying algorithms, data structures, machine learning models, and deployment practices.                  </p>
                   <p>
                     I actively participate in hackathons, explore emerging technologies, and continuously learn new tools and frameworks to expand my knowledge. My goal is to become a skilled software engineer capable of developing innovative, scalable, and user-focused solutions that create meaningful impact.
                   </p>

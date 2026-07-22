@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 
 export default function Hero() {
-  const titles = ["IT Engineering Student", "Full Stack Developer", "Data Science", "AI Developer"];
+  const titles = ["IT Engineering Student", "Full Stack Developer", "Data Science", "AI ML"];
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground font-mono text-base tracking-[0.2em] uppercase"
           >
-            
+
           </motion.p>
 
           <h1 className="text-7xl md:text-8xl font-bold font-display tracking-tight text-white leading-[1.08] uppercase">
@@ -54,25 +54,15 @@ export default function Hero() {
             I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-2">
-            <a
-              href="#contact"
-              data-testid="button-contact"
-              className="magnetic-btn px-7 py-3 rounded-full border border-primary/40 text-white font-semibold text-base hover:bg-primary/10 transition-colors flex items-center gap-2"
-            >
-              Contact Me
-            </a>
-            <button
-              data-testid="button-resume"
-              className="magnetic-btn px-7 py-3 rounded-full border border-primary/40 text-white font-semibold text-base hover:bg-primary/10 transition-colors flex items-center gap-2"
-            >
-              <Download className="w-5 h-5" /> Download Resume
-            </button>
-          </div>
+
+
+
+
+
 
           <div className="flex items-center gap-5 pt-4">
             {[
-              
+
             ].map(({ Icon, label, href }) => (
               <a
                 key={label}

@@ -7,13 +7,19 @@ const categories = [
     id: "programming",
     title: "Programming Languages",
     icon: Code2,
-    skills: ["Python", "Java", "JavaScript", "HTML5", "CSS3"],
+    skills: ["Python", "Java", "JavaScript", "HTML5", "CSS3", "SQL", "PostgreSQl"]
   },
   {
     id: "ai",
     title: "AI & Machine Learning",
     icon: Brain,
-    skills: ["Machine Learning", "Data Science", "Data Analysis", "NumPy", "Pandas", "Scikit-Learn", "Google Gemini API", "AI Automation"],
+    skills: ["Machine Learning", "Deep Learning", "NLP", "Data Science", "Data Analysis", "NumPy", "Pandas", "Tensorflow", "PyTorch", "Matplotlib", "Seaborn", "Keras", "Scikit-Learn", "Google Gemini API", "AI Automation", "LLM", "RAG"],
+  },
+  {
+    id: "fullstack devlopment",
+    title: "Fullstack Devlopment",
+    icon: Code2,
+    skills: ["Node.js", "React.js", "Next.js", "Express.js", "PostgreSQL", "Mongo db", "Tailwind css", "Bootstrap", "html", "css", "javascript", "typescript"],
   },
   {
     id: "tools",
@@ -30,11 +36,12 @@ const categories = [
 ];
 
 const FILTERS = [
-  { label: "All",           id: "all" },
-  { label: "Programming",   id: "programming" },
-  { label: "AI & ML",       id: "ai" },
-  { label: "Tools",         id: "tools" },
-  { label: "Databases",     id: "databases" },
+  { label: "All", id: "all" },
+  { label: "Programming", id: "programming" },
+  { label: "AI & ML", id: "ai" },
+  { label: "fullstack devlopment", id: "fullstack devlopment" },
+  { label: "Tools", id: "tools" },
+  { label: "Databases", id: "databases" },
 ];
 
 const container = {
@@ -73,11 +80,10 @@ export default function Skills() {
               key={f.id}
               onClick={() => setActive(f.id)}
               data-testid={`filter-${f.id}`}
-              className={`px-4 py-1.5 rounded-full text-base font-medium transition-all duration-200 border ${
-                active === f.id
-                  ? "bg-primary text-background border-primary"
-                  : "border-white/10 text-muted-foreground hover:border-primary/40 hover:text-white bg-transparent"
-              }`}
+              className={`px-4 py-1.5 rounded-full text-base font-medium transition-all duration-200 border ${active === f.id
+                ? "bg-primary text-background border-primary"
+                : "border-white/10 text-muted-foreground hover:border-primary/40 hover:text-white bg-transparent"
+                }`}
             >
               {f.label}
             </button>
