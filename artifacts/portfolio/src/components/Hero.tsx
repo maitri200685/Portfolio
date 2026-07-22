@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Download } from "lucide-react";
 
 export default function Hero() {
   const titles = ["IT Engineering Student", "Full Stack Developer", "Data Science", "AI ML"];
@@ -54,28 +53,6 @@ export default function Hero() {
             I'm excited to share my journey, experiences, and the work that reflects my passion for growth, creativity, and innovation.
           </p>
 
-
-
-
-
-
-
-          <div className="flex items-center gap-5 pt-4">
-            {[
-
-            ].map(({ Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                data-testid={`link-${label.toLowerCase()}`}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:border-primary/50 transition-all duration-200"
-              >
-                <Icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
         </motion.div>
 
       </div>
