@@ -1,6 +1,6 @@
 {
-  "buildCommand": "vite build",
+  "buildCommand": "cd ../.. && pnpm install && pnpm --filter @workspace/portfolio run build",
   "outputDirectory": "dist",
-  "installCommand": "npm install",
+  "installCommand": "pnpm install",
   "framework": "vite"
 }
