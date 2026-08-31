@@ -6,8 +6,8 @@
       "destination": "/api"
     }
   ],
-  "installCommand": "npx pnpm@9.12.3 install",
-  "buildCommand": "npx pnpm@9.12.3 run build",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build",
   "build": {
     "env": {
       "ENABLE_EXPERIMENTAL_COREPACK": "1"
