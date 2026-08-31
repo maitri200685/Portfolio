@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
-  const titles = ["IT Engineering Student", "Full Stack Developer", "Data Science", "AI ML"];
+  const titles = ["IT Engineering Student", "Data Science", "AI ML", "Gen AI", "Full Stack Developer"];
   const [titleIndex, setTitleIndex] = useState(0);
 
   useEffect(() => {

@@ -18,7 +18,7 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
-type FormState = "idle" | "sending" | "success" | "error";
+type FormState = "idle" | "sending" | "success" | "error" | string;
 
 export default function Contact() {
   const [state, setState] = useState<FormState>("idle");
@@ -31,29 +31,50 @@ export default function Contact() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setState("sending");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/" + EMAIL, {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      console.log("Web3Forms key loaded:", Boolean(accessKey));
+      
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
+          access_key: accessKey,
           name: values.name,
           email: values.email,
           message: values.message,
-          _subject: "New Portfolio Contact Form Submission",
-          _template: "table",
-          _captcha: "false",
+          subject: `New Portfolio Contact - ${values.name}`,
+          from_name: "Portfolio Contact Form",
         }),
       });
+      if (!res.ok) {
+        const text = await res.text();
+        let errorMessage = "Form submission failed.";
+        try {
+          const errData = JSON.parse(text);
+          errorMessage = errData.message || errorMessage;
+        } catch {
+          if (res.status === 403) errorMessage = "Invalid or missing Web3Forms Access Key.";
+          else errorMessage = `Server returned ${res.status}: ${text.slice(0, 50)}`;
+        }
+        setState(errorMessage);
+        return;
+      }
+      
       const data = await res.json();
-      if (data.success === "true" || data.success === true) {
+      
+      console.log("Web3Forms HTTP Status:", res.status);
+      console.log("Web3Forms Response:", data);
+
+      if (data.success) {
         setState("success");
         setTimeout(() => { setState("idle"); form.reset(); }, 4000);
       } else {
-        setState("error");
-        setTimeout(() => setState("idle"), 3500);
+        // DEV ONLY: Store the exact provider error message
+        setState(data.message || "error");
       }
-    } catch {
-      setState("error");
-      setTimeout(() => setState("idle"), 3500);
+    } catch (e: any) {
+      console.error("Fetch failed:", e);
+      setState(e.message || "error");
     }
   }
 
@@ -135,7 +156,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-2xl font-bold text-white">Message Sent!</h3>
                 <p className="text-muted-foreground text-base max-w-xs">
-                  Thank you for reaching out. Your message has been sent successfully.
+                  Message sent successfully! I'll get back to you soon.
                 </p>
               </motion.div>
             ) : state === "error" ? (
@@ -148,7 +169,11 @@ export default function Contact() {
                   <Mail className="w-8 h-8 text-red-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Unable to Send</h3>
-                <p className="text-muted-foreground text-base">Unable to send message. Please try again later.</p>
+                {state === "error" ? (
+                  <p className="text-muted-foreground text-base">Unable to send your message right now. Please try again or contact me directly.</p>
+                ) : (
+                  <p className="text-red-400 font-mono text-sm bg-red-900/20 p-4 rounded-xl border border-red-500/30">Web3Forms Error: {state}</p>
+                )}
               </motion.div>
             ) : (
               <Form {...form}>

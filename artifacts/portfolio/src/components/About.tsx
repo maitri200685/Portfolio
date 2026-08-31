@@ -38,16 +38,13 @@ export default function About() {
                 <p className="text-primary/80 font-medium text-lg mb-4">Information Technology Engineering Student</p>
                 <div className="space-y-4 text-muted-foreground leading-relaxed text-lg">
                   <p>
-                    I'm Maitri Prajapati, an Information Technology Engineering student currently pursuing my Bachelor's degree at L.D. College of Engineering, Ahmedabad.
-                  </p>
+                    I’m pursuing a degree in Information Technology at L.D. College of Engineering, with a strong interest in Artificial Intelligence, Machine Learning, Generative AI, and Data Science.                  </p>
                   <p>
-                    Passionate about technology and innovation, I enjoy building digital solutions that combine creativity, problem-solving, and real-world impact. My interests span across Full Stack Development, AIML, Data Science, and Software Engineering.
-                  </p>
+                    My AI/ML journey is focused on continuous learning, experimentation, and building practical solutions. I enjoy understanding how intelligent systems work and exploring how technology can be used to solve real-world problems.
+
+                    Alongside AI/ML, I have knowledge of full-stack development, including JavaScript, React, Node.js, databases, and APIs.                  </p>
                   <p>
-                    I enjoy building intelligent systems that solve real-world problems using AI while also developing modern, responsive web applications. My learning journey has focused on understanding not only how to build applications but also the underlying algorithms, data structures, machine learning models, and deployment practices.                  </p>
-                  <p>
-                    I actively participate in hackathons, explore emerging technologies, and continuously learn new tools and frameworks to expand my knowledge. My goal is to become a skilled software engineer capable of developing innovative, scalable, and user-focused solutions that create meaningful impact.
-                  </p>
+                    I’m currently focused on deepening my knowledge of Generative AI, LLMs, RAG, AI Agents, and applied Machine Learning, while continuously learning and improving through hands-on experience.                  </p>
                 </div>
               </div>
             </motion.div>

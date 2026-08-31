@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Code2, Brain, Wrench, Database } from "lucide-react";
 
 const categories = [
@@ -16,10 +16,10 @@ const categories = [
     skills: ["Machine Learning", "Deep Learning", "NLP", "Data Science", "Data Analysis", "NumPy", "Pandas", "Tensorflow", "PyTorch", "Matplotlib", "Seaborn", "Keras", "Scikit-Learn", "Google Gemini API", "AI Automation", "LLM", "RAG"],
   },
   {
-    id: "fullstack devlopment",
-    title: "Fullstack Devlopment",
+    id: "fullstack-development",
+    title: "Full Stack Development",
     icon: Code2,
-    skills: ["Node.js", "React.js", "Next.js", "Express.js", "PostgreSQL", "Mongo db", "Tailwind css", "Bootstrap", "html", "css", "javascript", "typescript"],
+    skills: ["Node.js", "React.js", "Next.js", "Express.js", "PostgreSQL", "MongoDB", "Tailwind CSS", "Bootstrap", "HTML", "CSS", "JavaScript", "TypeScript"],
   },
   {
     id: "tools",
@@ -39,16 +39,10 @@ const FILTERS = [
   { label: "All", id: "all" },
   { label: "Programming", id: "programming" },
   { label: "AI & ML", id: "ai" },
-  { label: "fullstack devlopment", id: "fullstack devlopment" },
+  { label: "Full Stack", id: "fullstack-development" },
   { label: "Tools", id: "tools" },
   { label: "Databases", id: "databases" },
 ];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.09 } },
-};
-const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
 export default function Skills() {
   const [active, setActive] = useState("all");
@@ -91,38 +85,41 @@ export default function Skills() {
         </div>
 
         <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+          layout
           className="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
         >
-          {visible.map((cat) => (
-            <motion.div
-              key={cat.id}
-              variants={item}
-              whileHover={{ scale: 1.02, rotateY: 3, rotateX: -2 }}
-              className={`glass-card p-7 rounded-2xl group hover:border-primary/40 transition-all duration-300`}
-              style={{ transformStyle: "preserve-3d", perspective: "800px" }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className={`p-3 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors text-primary`}>
-                  <cat.icon className="w-6 h-6" />
+          <AnimatePresence mode="popLayout">
+            {visible.map((cat) => (
+              <motion.div
+                layout
+                key={cat.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.02, rotateY: 3, rotateX: -2 }}
+                className={`glass-card p-7 rounded-2xl group hover:border-primary/40 transition-all duration-300 h-full`}
+                style={{ transformStyle: "preserve-3d", perspective: "800px" }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`p-3 rounded-xl bg-white/5 group-hover:bg-primary/10 transition-colors text-primary`}>
+                    <cat.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{cat.title}</h3>
                 </div>
-                <h3 className="text-lg font-bold text-white">{cat.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2.5">
-                {cat.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className={`text-sm px-4 py-2 rounded-full border transition-colors duration-200 group-hover:border-primary/30 bg-white/4 border-white/10 text-muted-foreground`}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                <div className="flex flex-wrap gap-2.5">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`text-sm px-4 py-2 rounded-full border transition-colors duration-200 group-hover:border-primary/30 bg-white/4 border-white/10 text-muted-foreground`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
 
       </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, X, Search, Star } from "lucide-react";
+import { Github, X, Search, Star } from "lucide-react";
 
 interface Project {
   id: number;
@@ -41,6 +41,7 @@ const projects: Project[] = [
     gradient: "from-violet-500/30 to-indigo-900/20",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2070&auto=format&fit=crop",
     featured: true,
+    github: "https://github.com/Nisarg9072-god/start-up",
   },
   {
     id: 2,
@@ -61,6 +62,7 @@ const projects: Project[] = [
     ],
     gradient: "from-blue-500/25 to-cyan-900/20",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+    github: "https://github.com/Nisarg9072-god/civicTrack",
   },
   {
     id: 3,
@@ -81,6 +83,7 @@ const projects: Project[] = [
     ],
     gradient: "from-emerald-500/25 to-green-900/20",
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop",
+    github: "https://github.com/maitri200685/fleetflow",
   },
   {
     id: 4,
@@ -101,6 +104,7 @@ const projects: Project[] = [
     ],
     gradient: "from-purple-500/25 to-violet-900/20",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1974&auto=format&fit=crop",
+    github: "https://github.com/maitri200685/Jarvis-AI-Assistant",
   },
   {
     id: 5,
@@ -121,6 +125,7 @@ const projects: Project[] = [
     ],
     gradient: "from-pink-500/20 to-rose-900/20",
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1974&auto=format&fit=crop",
+    github: "https://github.com/maitri200685/RAG-Course-Assistant",
   },
 ];
 
@@ -217,9 +222,6 @@ export default function Projects() {
                   <a href={project.github || "#"} className="p-2 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
                     <Github className="w-4.5 h-4.5" />
                   </a>
-                  <a href={project.demo || "#"} className="p-2 bg-background/70 backdrop-blur rounded-full border border-white/10 hover:bg-primary/20 hover:text-primary transition-colors text-white">
-                    <ExternalLink className="w-4.5 h-4.5" />
-                  </a>
                 </div>
               </div>
 
@@ -233,14 +235,7 @@ export default function Projects() {
                 <p className="text-muted-foreground text-sm mb-3 line-clamp-2 leading-relaxed">
                   {project.descShort}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.slice(0, 3).map(tech => (
-                    <span key={tech} className="glass-pill text-xs py-1">{tech}</span>
-                  ))}
-                  {project.stack.length > 3 && (
-                    <span className="glass-pill text-xs py-1">+{project.stack.length - 3}</span>
-                  )}
-                </div>
+
               </div>
             </motion.div>
           ))}
@@ -311,20 +306,10 @@ export default function Projects() {
                   </div>
 
                   <div className="space-y-7">
-                    <div>
-                      <h4 className="text-base font-bold text-white mb-4 uppercase tracking-wider font-mono">Technologies</h4>
-                      <div className="flex flex-wrap gap-2.5">
-                        {selectedProject.stack.map(tech => (
-                          <span key={tech} className="glass-pill text-sm">{tech}</span>
-                        ))}
-                      </div>
-                    </div>
+
                     <div className="space-y-2.5">
                       <a href={selectedProject.github || "#"} className="flex items-center justify-center gap-2 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-white text-base font-medium w-full">
                         <Github className="w-5 h-5" /> View Source
-                      </a>
-                      <a href={selectedProject.demo || "#"} className="flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-background hover:opacity-90 transition-opacity text-base font-semibold w-full">
-                        <ExternalLink className="w-5 h-5" /> Live Demo
                       </a>
                     </div>
                   </div>
