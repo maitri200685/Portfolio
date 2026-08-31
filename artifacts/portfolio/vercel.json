@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd ../.. && npm install -g pnpm@9.12.3 && pnpm install && pnpm --filter @workspace/portfolio run build",
+  "buildCommand": "cd ../.. && npx pnpm@9.12.3 install && npx pnpm@9.12.3 --filter @workspace/portfolio run build",
   "outputDirectory": "dist",
-  "installCommand": "npm install -g pnpm@9.12.3 && pnpm install",
+  "installCommand": "npx pnpm@9.12.3 install",
   "framework": "vite"
 }
