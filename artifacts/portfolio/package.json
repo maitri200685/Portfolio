@@ -11,7 +11,7 @@
   },
   "packageManager": "pnpm@9.12.3",
   "engines": {
-    "node": "24.x"
+    "node": "22.x"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
