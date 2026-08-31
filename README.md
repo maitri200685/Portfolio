@@ -6,7 +6,7 @@
 
 Building intelligent solutions with AI, Machine Learning, Deep Learning, Generative AI, and Modern Web Technologies.
 
-Portfolio : https://portfoliomaitripra.netlify.app/
+Portfolio : https://portfolio-maitrii.netlify.app/
 
 Linkdin : www.linkedin.com/in/maitri-prajapati-140b74317
 
