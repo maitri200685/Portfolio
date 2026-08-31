@@ -2,5 +2,10 @@
   "buildCommand": "cd ../.. && pnpm install && pnpm --filter @workspace/portfolio run build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
-  "framework": "vite"
+  "framework": "vite",
+  "build": {
+    "env": {
+      "ENABLE_EXPERIMENTAL_COREPACK": "1"
+    }
+  }
 }
