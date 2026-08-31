@@ -9,6 +9,10 @@
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
