@@ -1,16 +1,5 @@
 {
   "version": 2,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api"
-    }
-  ],
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build",
-  "build": {
-    "env": {
-      "ENABLE_EXPERIMENTAL_COREPACK": "1"
-    }
-  }
+  "buildCommand": "pnpm run build"
 }
