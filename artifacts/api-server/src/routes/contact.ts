@@ -55,13 +55,13 @@ router.post("/", async (req: Request, res: Response) => {
       logger.info({ previewUrl: nodemailer.getTestMessageUrl(info) }, "Test email preview available");
     }
 
-    res.status(200).json({ success: true, message: "Message sent successfully!" });
+    return res.status(200).json({ success: true, message: "Message sent successfully!" });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json({ success: false, errors: error.errors });
     }
     logger.error({ err: error }, "Failed to send contact email");
-    res.status(500).json({ success: false, message: "Failed to send message." });
+    return res.status(500).json({ success: false, message: "Failed to send message." });
   }
 });
 
