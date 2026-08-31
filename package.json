@@ -10,6 +10,9 @@
   },
   "private": true,
   "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": "18.x"
+  },
   "devDependencies": {
     "prettier": "^3.8.3",
     "typescript": "~5.9.3"
